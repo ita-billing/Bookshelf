@@ -4,3 +4,15 @@
 .center_display{
 	text-align:center;
 }
+.right_display{
+	text-align:right;
+}
+.borderline{
+	border-style: solid;
+	border-color: black;
+}
+.table_header {
+    background-color: #F5FFFA;
+    border-style: solid;
+    border-color: black;
+}
