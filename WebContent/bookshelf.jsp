@@ -16,14 +16,27 @@
    
     <h3>一覧</h3>
     <table border ="1" align="center" class="borderline">
-      <th class="table_header">名称</th>
-      <th class="table_header">読破率</th>
-      <th class="table_header">開始日</th>
-      <th class="table_header">終了日</th>
-      <th class="table_header">評価</th>
-      <th class="table_header">修正・削除</th>
+      <tr>
+        <td class="table_header">名称</td>
+        <td class="table_header">読破率</td>
+        <td class="table_header">開始日</td>
+        <td class="table_header">終了日</td>
+        <td class="table_header">評価</td>
+        <td class="table_header">修正・削除</td>
+      </tr>
+
+      <tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><input type="submit" value="修正・削除"></td>
+	    </tr>
+    
     </table>
 
+    <br>
     <div class="center_display">
     <tr>
       <input type="submit" style="width:320px; height:35px" value="登録">
