@@ -3,30 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script type="text/javascript" src="js/check.js"></script>
 <title>ログイン画面</title>
+
 </head>
 <body class="background_color">
     <h2>ログイン</h2>
+
     <div class="center_display">
-    <tr>
-      <th>ユーザーID：</th>
-      <td>
-        <input type = "text" name = "user_id" value = "" size ="24" maxlength ="5"/>
-      </td>
-    </tr>
+    <form  method="get" name="login_form">
+             ユーザーID：
+      <input type="text" name="user_id" value="" size="24" maxlength="5"/>
     <br>
     <br>
-    <tr>
-      <th>パスワード： </th>
-      <td>
-        <input type = "text" name = "user_id" value = "" size ="24" maxlength ="10"/>
-      </td>  
-    </tr>
+             パスワード：
+      <input type="text" name="password" value="" size="24" maxlength="10"/>
     <br>
     <br>
-    <tr>
-      <input type="submit" value="ログイン">
-    </tr>
+      <input type="submit" value="ログイン" onClick="return onButtonClick();">
+    </form>
     </div>
 </body>
 </html>
