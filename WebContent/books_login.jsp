@@ -24,4 +24,8 @@
     </form>
     </div>
 </body>
+<% if(request.getAttribute("status")== null){ %>
+<%    }else{ %>
+<%= request.getAttribute("status") %>
+<% } %>
 </html>
