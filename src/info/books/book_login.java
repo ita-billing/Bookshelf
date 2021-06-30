@@ -1,19 +1,20 @@
 package info.books;
 
-import javax.sql.DataSource;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Connection;
 
+import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.io.IOException;
 
-import com.sun.corba.se.spi.legacy.connection.Connection;
-import java.sql.ResultSet;
-
-public class book_login {
+public class book_login extends HttpServlet {
 
 	DataSource DS;
 
@@ -24,18 +25,19 @@ public class book_login {
 			}catch (Exception e) {
 				throw new ServletException(e);
 			}
-		}
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	  throws ServletException,IOException{
 		
-		request.setCharacterEncoding("utf-8");
-		
 		Connection conn = null;
 		ResultSet resultSet = null;
+		Statement stem = null;
 		
 		String username = null;
 		String status = null;
+		
+		request.setCharacterEncoding("utf-8");
 		
 		String id =  request.getParameter("user_id");
 		String password =  request.getParameter("password");
@@ -45,8 +47,8 @@ public class book_login {
 			
 			String sql = "SELECT USERNAME FROM LOGIN WHERE ID ='" + id + "' AND PASSWORD = '" + password + "'";
 			
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
+			stem = conn.createStatement();
+			resultSet = stem.executeQuery(sql);
 			
 			if(resultSet.next()) {
 				username = resultSet.getString("resultSet");
@@ -66,6 +68,8 @@ public class book_login {
 			}finally {
 				try {
 					conn.close();
+				}catch(Exception e) {
+					
 				}
 			}
 		}
