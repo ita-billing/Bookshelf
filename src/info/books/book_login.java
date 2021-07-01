@@ -20,8 +20,8 @@ public class book_login extends HttpServlet {
 
 	public void init() throws ServletException {
 		try {
-			InitialContext context = new InitialContext();
-			DS = (DataSource) context.lookup("java:comp/env/jdbc/book");
+			InitialContext cont = new InitialContext();
+			DS = (DataSource) cont.lookup("java:comp/env/jdbc/book");
 			}catch (Exception e) {
 				throw new ServletException(e);
 			}
@@ -64,12 +64,15 @@ public class book_login extends HttpServlet {
 				request.getRequestDispatcher("/books_login.jsp").forward(request, response);
 			}
 		
-		}catch (Exception e) {	
+		}catch (Exception e) {
+			status ="ÉGÉâÅ[Ç™î≠ê∂ÇµÇ‹ÇµÇΩÅB";
+			request.setAttribute("status", status);
+			
+			request.getRequestDispatcher("/books_login.jsp").forward(request, response);
 			}finally {
 				try {
 					conn.close();
 				}catch(Exception e) {
-					
 				}
 			}
 		}

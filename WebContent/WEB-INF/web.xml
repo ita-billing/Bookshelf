@@ -24,6 +24,6 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Bookshelf</servlet-name>
-		<url-pattern>/Bookshelf</url-pattern>
+		<url-pattern>/Book_shelf</url-pattern>
 	</servlet-mapping>
 </web-app>

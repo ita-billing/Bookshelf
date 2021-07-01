@@ -11,7 +11,7 @@
     <h2>ログイン</h2>
 
     <div class="center_display">
-    <form  method="get" name="login_form">
+    <form action="<%=request.getContextPath()%>/book_login" method="POST" name="login_form">
              ユーザーID：
       <input type="text" name="user_id" value="" size="24" maxlength="5"/>
     <br>
@@ -22,10 +22,12 @@
     <br>
       <input type="submit" value="ログイン" onClick="return onButtonClick();">
     </form>
+
+    <% if(request.getAttribute("status")== null){ %>
+    <%    }else{ %>
+    <h3><%= request.getAttribute("status") %></h3>
+    <% } %>
+
     </div>
 </body>
-<% if(request.getAttribute("status")== null){ %>
-<%    }else{ %>
-<%= request.getAttribute("status") %>
-<% } %>
 </html>
