@@ -16,12 +16,12 @@ import javax.servlet.http.HttpSession;
 
 public class book_login extends HttpServlet {
 
-	DataSource DS;
+	DataSource ds;
 
 	public void init() throws ServletException {
 		try {
 			InitialContext cont = new InitialContext();
-			DS = (DataSource) cont.lookup("java:comp/env/jdbc/book");
+			ds = (DataSource) cont.lookup("java:comp/env/jdbc/bookshelf");
 			}catch (Exception e) {
 				throw new ServletException(e);
 			}
@@ -31,8 +31,8 @@ public class book_login extends HttpServlet {
 	  throws ServletException,IOException{
 		
 		Connection conn = null;
-		ResultSet resultSet = null;
-		Statement stem = null;
+		ResultSet result = null;
+		Statement stmt  = null;
 		
 		String username = null;
 		String status = null;
@@ -43,15 +43,14 @@ public class book_login extends HttpServlet {
 		String password =  request.getParameter("password");
 		
 		try {
-			conn = DS.getConnection();
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
 			
 			String sql = "SELECT USERNAME FROM LOGIN WHERE ID ='" + id + "' AND PASSWORD = '" + password + "'";
+			result = stmt.executeQuery(sql);
 			
-			stem = conn.createStatement();
-			resultSet = stem.executeQuery(sql);
-			
-			if(resultSet.next()) {
-				username = resultSet.getString("resultSet");
+			if(result.next()) {
+				username = result.getString("USERNAME");
 				
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username",username);
