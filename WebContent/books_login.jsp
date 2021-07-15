@@ -17,15 +17,15 @@
     <br>
     <br>
              パスワード：
-      <input type="text" name="password" value="" size="24" maxlength="10"/>
+      <input type="password" name="password" value="" size="24" maxlength="10"/>
     <br>
     <br>
       <input type="submit" value="ログイン" onClick="return onButtonClick();">
     </form>
 
-    <% if(request.getAttribute("status")== null){ %>
+    <% if(request.getAttribute("message")== null){ %>
     <%    }else{ %>
-    <h3><%= request.getAttribute("status") %></h3>
+    <h3><%= request.getAttribute("message") %></h3>
     <% } %>
 
     </div>

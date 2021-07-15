@@ -7,12 +7,11 @@ import java.sql.Connection;
 
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 public class book_login extends HttpServlet {
 
@@ -35,7 +34,10 @@ public class book_login extends HttpServlet {
 		Statement stmt  = null;
 		
 		String username = null;
-		String status = null;
+		String message = null;
+		
+		String screen = "/books_login.jsp";
+		String change = "/change_screen";
 		
 		request.setCharacterEncoding("utf-8");
 		
@@ -51,23 +53,29 @@ public class book_login extends HttpServlet {
 			
 			if(result.next()) {
 				username = result.getString("USERNAME");
+				screen = "/bookshelf.jsp";
 				
-				HttpSession session = request.getSession(true);
-				session.setAttribute("username",username);
+				request.setAttribute("name",username);
+				request.setAttribute("screen",screen);
 				
-				request.getRequestDispatcher("/bookshelf.jsp").forward(request, response);
+				RequestDispatcher changeScreen = request.getRequestDispatcher(change);
+				changeScreen.forward(request, response);
+				
 			}else {
-				status ="該当するユーザーが見つかりませんでした。";
-				request.setAttribute("status", status);
+				message ="該当するユーザーが見つかりませんでした。";
 				
-				request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+				request.setAttribute("message", message);
+				request.setAttribute("screen",screen);
+				
+				RequestDispatcher changeScreen = request.getRequestDispatcher(change);
+				changeScreen.forward(request, response);
 			}
 		
 		}catch (Exception e) {
-			status ="エラーが発生しました。";
-			request.setAttribute("status", status);
+			message ="エラーが発生しました。";
+			request.setAttribute("message", message);
 			
-			request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+			request.getRequestDispatcher(screen).forward(request, response);
 			}finally {
 				try {
 					conn.close();

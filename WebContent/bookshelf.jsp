@@ -6,7 +6,11 @@
 <title>本棚</title>
 <h2>本棚</h2>
 <div class="right_display">
-  <th>ID：</th>
+	<%
+	  String name = (String)session.getAttribute("name");
+	%>
+
+  <th>ID: <%= name %> </th>
   <br>
   <input type="submit" value="ログアウト">
 </div>

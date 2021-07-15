@@ -15,12 +15,20 @@
 		<servlet-class>info.books.book_login</servlet-class>
     </servlet>
 	<servlet>
+		<servlet-name>ChangeScreen</servlet-name>
+		<servlet-class>info.books.change_screen</servlet-class>
+    </servlet>
+	<servlet>
 		<servlet-name>Bookshelf</servlet-name>
 		<servlet-class>info.books.Bookshelf</servlet-class>
     </servlet>
     <servlet-mapping>
 		<servlet-name>BookLogin</servlet-name>
 		<url-pattern>/book_login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangeScreen</servlet-name>
+		<url-pattern>/change_screen</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Bookshelf</servlet-name>
