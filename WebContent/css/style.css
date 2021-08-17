@@ -15,4 +15,8 @@
     background-color: #F5FFFA;
     border-style: solid;
     border-color: black;
+    font-weight: bold;	
+}
+.table_body {
+    background-color: #EEEEEE;
 }
