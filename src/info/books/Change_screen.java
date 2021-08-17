@@ -32,7 +32,7 @@ public class Change_screen extends HttpServlet {
     			request.getRequestDispatcher(screen).forward(request, response);
     		}
 		}catch (Exception e) {
-			message ="";
+			message ="エラーが発生しました。再度ログインし直してください。";
 			request.setAttribute("message", message);
 			request.getRequestDispatcher(screen).forward(request, response);			
 		}
