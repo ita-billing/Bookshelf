@@ -35,29 +35,29 @@ public class book_login extends HttpServlet {
 		
 		String username = null;
 		String message = null;
-		
+
 		String screen = "/books_login.jsp";
 		String change = "/change_screen";
-		
-		request.setCharacterEncoding("utf-8");
-		
+
 		String id =  request.getParameter("user_id");
 		String password =  request.getParameter("password");
-		
+
+		request.setCharacterEncoding("utf-8");
+
 		try {
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
-			
+
 			String sql = "SELECT USERNAME FROM LOGIN WHERE ID ='" + id + "' AND PASSWORD = '" + password + "'";
 			result = stmt.executeQuery(sql);
-			
+
 			if(result.next()) {
 				username = result.getString("USERNAME");
 				screen = "/bookshelf.jsp";
-				
+
 				request.setAttribute("name",username);
 				request.setAttribute("screen",screen);
-				
+
 				RequestDispatcher changeScreen = request.getRequestDispatcher(change);
 				changeScreen.forward(request, response);
 				
@@ -67,12 +67,11 @@ public class book_login extends HttpServlet {
 				request.setAttribute("message", message);
 				request.setAttribute("screen",screen);
 				
-				RequestDispatcher changeScreen = request.getRequestDispatcher(change);
-				changeScreen.forward(request, response);
+				request.getRequestDispatcher(screen).forward(request, response);
 			}
 		
 		}catch (Exception e) {
-			message ="エラーが発生しました。";
+			message ="エラーが発生しました。再度ログインし直してください。";
 			request.setAttribute("message", message);
 			
 			request.getRequestDispatcher(screen).forward(request, response);

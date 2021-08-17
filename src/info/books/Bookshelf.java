@@ -1,17 +1,21 @@
 package info.books;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Connection;
 
-import java.sql.*;
 import javax.sql.DataSource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class Bookshelf extends HttpServlet {
 	
 	DataSource ds;
 	
-	public void doGet(HttpServlet request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	  throws ServletException,IOException{
 		
 		Connection con = null;
@@ -26,6 +30,9 @@ public class Bookshelf extends HttpServlet {
 			
 			String sql = "Select title,progress,startdate,enddate,evaluation from bookshelf";
 			rs = stmt.executeQuery(sql);
+			
+			request.setAttribute("result", rs);
+			request.getRequestDispatcher("/bookshelf.jsp").forward(request, response);
 			
 			
 		} catch(Exception e) {
