@@ -29,7 +29,7 @@
         <td class="table_header center_display">開始日</td>
         <td class="table_header center_display">終了日</td>
         <td class="table_header center_display">評価</td>
-        <td class="table_header center_display">修正・削除/td>
+        <td class="table_header center_display">修正・削除</td>
       </tr>
       <%
 		while (rs.next()) {

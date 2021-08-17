@@ -62,7 +62,7 @@ public class book_login extends HttpServlet {
 				changeScreen.forward(request, response);
 				
 			}else {
-				message ="ŠY“–‚·‚éƒ†[ƒU[‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B";
+				message ="è©²å½“ã™ã‚‹ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚";
 				
 				request.setAttribute("message", message);
 				request.setAttribute("screen",screen);
@@ -71,7 +71,7 @@ public class book_login extends HttpServlet {
 			}
 		
 		}catch (Exception e) {
-			message ="ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½BÄ“xƒƒOƒCƒ“‚µ’¼‚µ‚Ä‚­‚¾‚³‚¢B";
+			message ="ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚å†åº¦ãƒ­ã‚°ã‚¤ãƒ³ã—ç›´ã—ã¦ãã ã•ã„ã€‚";
 			request.setAttribute("message", message);
 			
 			request.getRequestDispatcher(screen).forward(request, response);
