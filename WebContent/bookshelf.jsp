@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; chars=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*"%>
 <html>
 <head>
-<meta chars="UTF-8">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>本棚</title>
 <h2>本棚</h2>

@@ -16,7 +16,7 @@
     </servlet>
 	<servlet>
 		<servlet-name>ChangeScreen</servlet-name>
-		<servlet-class>info.books.change_screen</servlet-class>
+		<servlet-class>info.books.Change_screen</servlet-class>
     </servlet>
 	<servlet>
 		<servlet-name>Bookshelf</servlet-name>
@@ -28,7 +28,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ChangeScreen</servlet-name>
-		<url-pattern>/change_screen</url-pattern>
+		<url-pattern>/Change_screen</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Bookshelf</servlet-name>

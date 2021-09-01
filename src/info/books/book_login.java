@@ -37,7 +37,7 @@ public class book_login extends HttpServlet {
 		String message = null;
 
 		String screen = "/books_login.jsp";
-		String change = "/change_screen";
+		String change = "/Change_screen";
 
 		String id =  request.getParameter("user_id");
 		String password =  request.getParameter("password");
@@ -58,8 +58,8 @@ public class book_login extends HttpServlet {
 				request.setAttribute("name",username);
 				request.setAttribute("screen",screen);
 
-				RequestDispatcher changeScreen = request.getRequestDispatcher(change);
-				changeScreen.forward(request, response);
+				RequestDispatcher ChangeScreen = request.getRequestDispatcher(change);
+				ChangeScreen.forward(request, response);
 				
 			}else {
 				message ="該当するユーザーが見つかりませんでした。";
