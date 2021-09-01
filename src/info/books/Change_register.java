@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Change_register extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	  throws ServletException,IOException{
+	  throws ServletException,IOException {
 		
 		// 初期設定
 		String userid = null;
@@ -28,12 +28,11 @@ public class Change_register extends HttpServlet {
 			RequestDispatcher initRegister = request.getRequestDispatcher("/init_register");
 			initRegister.forward(request, response);
 			
-		}catch (Exception e){
+		}catch(Exception e) {
 			// 例外処理
 			message ="エラーが発生しました。再度ログインし直してください。";
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/books_login.jsp").forward(request, response);
 		}
-		
 	}
 }

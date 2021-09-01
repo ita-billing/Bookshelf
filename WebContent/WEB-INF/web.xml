@@ -19,17 +19,26 @@
 		<servlet-class>info.books.Change_screen</servlet-class>
     </servlet>
 	<servlet>
+		<servlet-name>Bookshelf</servlet-name>
+		<servlet-class>info.books.Bookshelf</servlet-class>
+    </servlet>
+	<servlet>
 		<servlet-name>changeRegister</servlet-name>
 		<servlet-class>info.books.Change_register</servlet-class>
     </servlet>
 	<servlet>
 		<servlet-name>initRegister</servlet-name>
-		<servlet-class>info.books.init_register</servlet-class>
+		<servlet-class>info.books.Init_register</servlet-class>
     </servlet>
 	<servlet>
-		<servlet-name>Bookshelf</servlet-name>
-		<servlet-class>info.books.Bookshelf</servlet-class>
+		<servlet-name>changeEdit</servlet-name>
+		<servlet-class>info.books.Change_edit</servlet-class>
     </servlet>
+	<servlet>
+		<servlet-name>initEdit</servlet-name>
+		<servlet-class>info.books.Init_edit</servlet-class>
+    </servlet>
+
     <servlet-mapping>
 		<servlet-name>BookLogin</servlet-name>
 		<url-pattern>/book_login</url-pattern>
@@ -49,6 +58,14 @@
 	<servlet-mapping>
 		<servlet-name>initRegister</servlet-name>
 		<url-pattern>/init_register</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>changeEdit</servlet-name>
+		<url-pattern>/change_edit</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>initEdit</servlet-name>
+		<url-pattern>/init_edit</url-pattern>
 	</servlet-mapping>
 
 </web-app>
