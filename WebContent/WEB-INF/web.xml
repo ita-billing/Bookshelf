@@ -19,6 +19,14 @@
 		<servlet-class>info.books.Change_screen</servlet-class>
     </servlet>
 	<servlet>
+		<servlet-name>changeRegister</servlet-name>
+		<servlet-class>info.books.Change_register</servlet-class>
+    </servlet>
+	<servlet>
+		<servlet-name>initRegister</servlet-name>
+		<servlet-class>info.books.init_register</servlet-class>
+    </servlet>
+	<servlet>
 		<servlet-name>Bookshelf</servlet-name>
 		<servlet-class>info.books.Bookshelf</servlet-class>
     </servlet>
@@ -32,6 +40,15 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Bookshelf</servlet-name>
-		<url-pattern>/Book_shelf</url-pattern>
+		<url-pattern>/init_bookshelf</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>changeRegister</servlet-name>
+		<url-pattern>/change_register</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>initRegister</servlet-name>
+		<url-pattern>/init_register</url-pattern>
+	</servlet-mapping>
+
 </web-app>
