@@ -2,6 +2,7 @@ package info.books;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,14 +28,19 @@ public class Change_screen extends HttpServlet {
 			
 			if(message != null) {
 				request.setAttribute("message", message);
-				request.getRequestDispatcher(screen).forward(request, response);
+				//request.getRequestDispatcher(screen).forward(request, response);
+				
+				
+				RequestDispatcher Bookshelf = request.getRequestDispatcher(screen);
+				Bookshelf.forward(request, response);
+				
     		}else{
     			request.getRequestDispatcher(screen).forward(request, response);
     		}
 		}catch (Exception e) {
-			message ="";
+			message ="エラーが発生しました。再度ログインし直してください。";
 			request.setAttribute("message", message);
-			request.getRequestDispatcher(screen).forward(request, response);			
+			request.getRequestDispatcher(screen).forward(request, response);
 		}
 	}
 }

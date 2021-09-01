@@ -12,9 +12,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class book_login extends HttpServlet {
 
+	// データソースを設定
 	DataSource ds;
 
 	public void init() throws ServletException {
@@ -33,11 +35,11 @@ public class book_login extends HttpServlet {
 		ResultSet result = null;
 		Statement stmt  = null;
 		
+		// 初期設定
 		String username = null;
 		String message = null;
 
 		String screen = "/books_login.jsp";
-		String change = "/Change_screen";
 
 		String id =  request.getParameter("user_id");
 		String password =  request.getParameter("password");
@@ -52,14 +54,14 @@ public class book_login extends HttpServlet {
 			result = stmt.executeQuery(sql);
 
 			if(result.next()) {
+				request.setAttribute("userid",id);
+				
 				username = result.getString("USERNAME");
-				screen = "/bookshelf.jsp";
-
-				request.setAttribute("name",username);
-				request.setAttribute("screen",screen);
-
-				RequestDispatcher ChangeScreen = request.getRequestDispatcher(change);
-				ChangeScreen.forward(request, response);
+				HttpSession session = request.getSession(true);
+				session.setAttribute("name",username);
+				
+				RequestDispatcher Bookshelf = request.getRequestDispatcher("/init_bookshelf");
+				Bookshelf.forward(request, response);			
 				
 			}else {
 				message ="該当するユーザーが見つかりませんでした。";
@@ -71,12 +73,14 @@ public class book_login extends HttpServlet {
 			}
 		
 		}catch (Exception e) {
+			// 例外処理
 			message ="エラーが発生しました。再度ログインし直してください。";
 			request.setAttribute("message", message);
 			
 			request.getRequestDispatcher(screen).forward(request, response);
 			}finally {
 				try {
+					// DBの接続をクローズ
 					conn.close();
 				}catch(Exception e) {
 				}
