@@ -3,10 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<title>本の登録</title>
-<h2>本の登録</h2>
+<title>登録</title>
+<h2>登録</h2>
 <div class="right_display">
 	<%
 	  String name = (String)session.getAttribute("name");

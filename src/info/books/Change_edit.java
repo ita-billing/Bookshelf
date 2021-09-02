@@ -2,6 +2,7 @@ package info.books;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +14,19 @@ public class Change_edit extends HttpServlet {
 	  throws ServletException,IOException {
 		
 		// 初期設定
-		String userid = null;
 		String seqid = null;
 		String message = null;
 		
 		request.setCharacterEncoding("UTF-8");
 		
 		try {
+
+			// seqIDをセット
+			request.setAttribute("seqid",seqid);
+			
+			// 編集画面に遷移
+			RequestDispatcher initEdit = request.getRequestDispatcher("/init_edit");
+			initEdit.forward(request, response);
 			
 		}catch(Exception e) {
 			// 例外処理

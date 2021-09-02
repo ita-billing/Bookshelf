@@ -30,7 +30,11 @@ public class Init_register extends HttpServlet {
 
 			request.getRequestDispatcher("/book_register.jsp").forward(request, response);
 			
-		}finally {
+		}catch(Exception e) {
+			// 例外処理
+			message ="エラーが発生しました。再度ログインし直してください。";
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("/books_login.jsp").forward(request, response);
 		}
 	}
 

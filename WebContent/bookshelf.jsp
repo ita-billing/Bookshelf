@@ -45,7 +45,7 @@
 		<td class="table_body center_display"><%=rs.getString(7)%></td>
 			
 			<td>
-                <form action="<%=request.getContextPath()%>/change_register" method="POST">
+                <form action="<%=request.getContextPath()%>/change_register" method="POST" name="register_form">
                     <input type="hidden" name="SEQID" value="<%=rs.getString(1)%>">
                     <input type="hidden" name="TITLE" value="<%=rs.getString(2)%>">
                     <input type="hidden" name="AUTHORNAME" value="<%=rs.getString(3)%>">
@@ -64,9 +64,11 @@
 
     <br>
     <div class="center_display">
+    <form action="<%=request.getContextPath()%>/change_edit" method="POST" name="edit_form">
     <tr>
       <input type="submit" style="width:320px; height:35px" value="登録">
     </tr>
+    </form>
     </div>
 </body>
 </html>
