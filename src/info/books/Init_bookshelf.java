@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Bookshelf extends HttpServlet {
+public class Init_bookshelf extends HttpServlet {
 	
 	DataSource ds;
 	

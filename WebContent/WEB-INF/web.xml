@@ -19,23 +19,23 @@
 		<servlet-class>info.books.Change_screen</servlet-class>
     </servlet>
 	<servlet>
-		<servlet-name>Bookshelf</servlet-name>
-		<servlet-class>info.books.Bookshelf</servlet-class>
+		<servlet-name>InitBookshelf</servlet-name>
+		<servlet-class>info.books.Init_bookshelf</servlet-class>
     </servlet>
 	<servlet>
-		<servlet-name>changeRegister</servlet-name>
+		<servlet-name>ChangeRegister</servlet-name>
 		<servlet-class>info.books.Change_register</servlet-class>
     </servlet>
 	<servlet>
-		<servlet-name>initRegister</servlet-name>
+		<servlet-name>InitRegister</servlet-name>
 		<servlet-class>info.books.Init_register</servlet-class>
     </servlet>
 	<servlet>
-		<servlet-name>changeEdit</servlet-name>
+		<servlet-name>ChangeEdit</servlet-name>
 		<servlet-class>info.books.Change_edit</servlet-class>
     </servlet>
 	<servlet>
-		<servlet-name>initEdit</servlet-name>
+		<servlet-name>InitEdit</servlet-name>
 		<servlet-class>info.books.Init_edit</servlet-class>
     </servlet>
 
@@ -48,23 +48,23 @@
 		<url-pattern>/Change_screen</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Bookshelf</servlet-name>
+		<servlet-name>InitBookshelf</servlet-name>
 		<url-pattern>/init_bookshelf</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>changeRegister</servlet-name>
+		<servlet-name>ChangeRegister</servlet-name>
 		<url-pattern>/change_register</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>initRegister</servlet-name>
+		<servlet-name>InitRegister</servlet-name>
 		<url-pattern>/init_register</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>changeEdit</servlet-name>
+		<servlet-name>ChangeEdit</servlet-name>
 		<url-pattern>/change_edit</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>initEdit</servlet-name>
+		<servlet-name>InitEdit</servlet-name>
 		<url-pattern>/init_edit</url-pattern>
 	</servlet-mapping>
 

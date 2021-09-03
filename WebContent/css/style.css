@@ -1,16 +1,24 @@
 .background_color{
 	background-color: rgb(208, 206, 206);
 }
+
 .center_display{
 	text-align:center;
 }
 .right_display{
 	text-align:right;
 }
+.editCenter_display{
+  display:flex;
+  justify-content:center;
+  padding:30px;  
+}
+
 .borderline{
 	border-style: solid;
 	border-color: black;
 }
+
 .table_header {
     background-color: #F5FFFA;
     border-style: solid;
@@ -20,7 +28,6 @@
 .table_body {
     background-color: #EEEEEE;
 }
-
 .table_hidden {
     display:none;
 }

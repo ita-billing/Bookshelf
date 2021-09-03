@@ -1,8 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>本棚</title>
 <h2>本棚</h2>
@@ -45,7 +47,7 @@
 		<td class="table_body center_display"><%=rs.getString(7)%></td>
 			
 			<td>
-                <form action="<%=request.getContextPath()%>/change_register" method="POST" name="register_form">
+                <form action="<%=request.getContextPath()%>/change_edit" method="POST" name="edit_form">
                     <input type="hidden" name="SEQID" value="<%=rs.getString(1)%>">
                     <input type="hidden" name="TITLE" value="<%=rs.getString(2)%>">
                     <input type="hidden" name="AUTHORNAME" value="<%=rs.getString(3)%>">
@@ -64,7 +66,7 @@
 
     <br>
     <div class="center_display">
-    <form action="<%=request.getContextPath()%>/change_edit" method="POST" name="edit_form">
+    <form action="<%=request.getContextPath()%>/change_register" method="POST" name="register_form">
     <tr>
       <input type="submit" style="width:320px; height:35px" value="登録">
     </tr>
