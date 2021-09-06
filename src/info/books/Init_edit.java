@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import info.books.BookBeans;
+
 public class Init_edit extends HttpServlet {
 	
 	
@@ -14,22 +16,23 @@ public class Init_edit extends HttpServlet {
 			throws ServletException,IOException{
 		
 		// 初期設定
-				String seqid = null;
-				String message = null;
+		String message = null;
 				
-				request.setCharacterEncoding("UTF-8");
-				
-				try {			
-					// seqIDをセット
-					seqid = (String) request.getAttribute("seqid");
-
-					request.getRequestDispatcher("/book_edit.jsp").forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+        // JavaBeansの初期化
+		BookBeans books = new BookBeans(request);
+			
+		try {
+			
+			request.setAttribute("books", books);
+			request.getRequestDispatcher("/book_edit.jsp").forward(request, response);
 					
-				}catch(Exception e) {
-					// 例外処理
-					message ="エラーが発生しました。再度ログインし直してください。";
-					request.setAttribute("message", message);
-					request.getRequestDispatcher("/books_login.jsp").forward(request, response);
-				}
+			}catch(Exception e) {
+				// 例外処理
+				message ="エラーが発生しました。再度ログインし直してください。";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+			}
 	}
 }
