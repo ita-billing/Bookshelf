@@ -13,9 +13,13 @@
 	  ResultSet rs = (ResultSet) request.getAttribute("result"); 
 	  String name = (String)session.getAttribute("name");
 	%>
-  <th>ユーザー名: <%= name %> </th>
-  <br>
-  <input type="submit" value="ログアウト">
+
+  <form action="<%=request.getContextPath()%>/logout" method="POST">
+    <th>ユーザー名: <%= name %> </th>
+    <br>
+    <input type="submit" value="ログアウト">
+  </form>
+  
 </div>
 <td>
 </head>

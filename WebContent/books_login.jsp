@@ -8,10 +8,15 @@
 
 </head>
 <body class="background_color">
+    <%
+	  // セッション終了
+	  session.invalidate();
+	%>
+    
     <h2>ログイン</h2>
 
     <div class="center_display">
-    <form action="<%=request.getContextPath()%>/book_login" method="POST" name="login_form">
+    <form action="<%=request.getContextPath()%>/login" method="POST" name="login_form">
              ユーザーID：
       <input type="text" name="user_id" value="" size="24" maxlength="5"/>
     <br>

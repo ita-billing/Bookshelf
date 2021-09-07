@@ -11,8 +11,12 @@
 	</welcome-file-list>
 
 	<servlet>
-		<servlet-name>BookLogin</servlet-name>
-		<servlet-class>info.books.book_login</servlet-class>
+		<servlet-name>LoginBookshelf</servlet-name>
+		<servlet-class>info.books.Login_bookshelf</servlet-class>
+    </servlet>
+    <servlet>
+		<servlet-name>LogoutBookshelf</servlet-name>
+		<servlet-class>info.books.Logout_bookshelf</servlet-class>
     </servlet>
 	<servlet>
 		<servlet-name>ChangeScreen</servlet-name>
@@ -40,8 +44,12 @@
     </servlet>
 
     <servlet-mapping>
-		<servlet-name>BookLogin</servlet-name>
-		<url-pattern>/book_login</url-pattern>
+		<servlet-name>LoginBookshelf</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LogoutBookshelf</servlet-name>
+		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ChangeScreen</servlet-name>

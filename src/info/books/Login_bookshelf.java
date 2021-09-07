@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class book_login extends HttpServlet {
+public class Login_bookshelf extends HttpServlet {
 
 	// データソースを設定
 	DataSource ds;
