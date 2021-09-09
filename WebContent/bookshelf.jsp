@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script type="text/javascript" src="js/logout.js"></script>
 <title>本棚</title>
 <h2>本棚</h2>
 <div class="right_display">
@@ -14,10 +15,10 @@
 	  String name = (String)session.getAttribute("name");
 	%>
 
-  <form action="<%=request.getContextPath()%>/logout" method="POST">
+  <form action="<%=request.getContextPath()%>/logout" method="POST" name="logout_form">
     <th>ユーザー名: <%= name %> </th>
     <br>
-    <input type="submit" value="ログアウト">
+    <input type="submit" value="ログアウト" onClick="return onLogoutButton();">
   </form>
   
 </div>

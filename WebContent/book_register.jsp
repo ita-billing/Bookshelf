@@ -5,40 +5,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script type="text/javascript" src="js/logout.js"></script>
 <title>登録</title>
 <h2>登録</h2>
 <div class="right_display">
 	<%
 	  String name = (String)session.getAttribute("name");
 	%>
-  <th>ユーザー名: <%= name %> </th>
-  <br>
-  <input type="submit" value="ログアウト">
+
+	<form action="<%=request.getContextPath()%>/logout" method="POST">
+      <th>ユーザー名: <%= name %> </th>
+      <br>
+      <input type="submit" value="ログアウト" onClick="return onLogoutButton();">
+    </form>
+
 </div>
 <td>
 </head>
 <body class="background_color">
 
-    <!-- 登録フォーム -->
-    <h2>【登録】</h2>
-         以下から登録できます。
-    <br><br>
-    <form action="<%=request.getContextPath()%>/" method="POST">
-      　　  タイトル: <input type="text" name="TITLE">
-      <br><br>
-                  作者: <input type="text" name="AUTHORNAME">
-      <br><br>
-              読破率: <input type="text" name="PROGRESS">
-      <br><br>        
-              開始日: <input type="text" name="STARTDATE">
-      <br><br>        
-              終了日: <input type="text" name="ENDDATE">
-      <br><br>        
-              　評価: <input type="text" name="EVALUATION">
-      <br><br>
-        <input type="hidden" name="mode" value="add"> <input type="submit" value="登録">
-    </form>
-
+         以下から登録できます。    
+    <div class="editCenter_display">
+      <form name="edit_form">
+               タイトル: <input type="text" name="TITLE">
+               作者：  <input type="text" name="AUTHORNAME">
+               読破率：  <input type="text" name="PROGRESS" size="2">
+       <br>               
+               開始日：  <input type="text" name="STARTDATE">
+               終了日：  <input type="text" name="ENDDATE">
+               評価：
+       <SELECT NAME="EVALUATION">
+         <OPTION VALUE="NULL"></OPTION>
+         <OPTION VALUE="0">高</OPTION>
+         <OPTION VALUE="1">低</OPTION>
+       </SELECT>
+      </form>
+    </div>
+    
+    <div class="editCenter_display">
+      <form  method="POST" name="bookRegister_form">
+        <input type="submit" style="width:160px; height:35px" value="登録">
+      </form>
+    </div>
 
 </body>
 </html>

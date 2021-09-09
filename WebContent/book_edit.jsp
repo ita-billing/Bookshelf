@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script type="text/javascript" src="js/logout.js"></script>
 <title>編集画面</title>
 <h2>編集</h2>
 <div class="right_display">
@@ -13,9 +14,13 @@
 	  String name = (String)session.getAttribute("name");
 	  BookBeans books = (BookBeans) request.getAttribute("books");
 	%>
-  <th>ユーザー名: <%= name %> </th>
-  <br>
-  <input type="submit" value="ログアウト">
+	
+	<form action="<%=request.getContextPath()%>/logout" method="POST">
+      <th>ユーザー名: <%= name %> </th>
+      <br>
+      <input type="submit" value="ログアウト" onClick="return onLogoutButton();">
+    </form>
+
 </div>
 <td>
 </head>
