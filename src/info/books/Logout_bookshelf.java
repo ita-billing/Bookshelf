@@ -15,6 +15,8 @@ public class Logout_bookshelf extends HttpServlet {
 		// 初期設定
 		String message = null;
 		
+		request.setCharacterEncoding("utf-8");
+		
 		try {
 			// ログアウト後のメッセージを設定
 			message ="ログアウトしました。";			
