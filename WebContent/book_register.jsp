@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script type="text/javascript" src="js/check_register.js"></script>
 <script type="text/javascript" src="js/logout.js"></script>
 <title>登録</title>
 <h2>登録</h2>
@@ -24,17 +25,17 @@
 </head>
 <body class="background_color">
 
-         以下から登録できます。    
+         以下から登録できます。
     <div class="editCenter_display">
-      <form name="edit_form">
-               タイトル: <input type="text" name="TITLE" maxlength="50">
-               作者：  <input type="text" name="AUTHORNAME" maxlength="50">
-               読破率：  <input type="number" name="PROGRESS" size="2" maxlength="3">
+    <form  name="edit_form">
+               タイトル: <input type="text" name="TITLE" value=""　maxlength="50">
+               作者：  <input type="text" name="AUTHORNAME" value=""　maxlength="50">
+               読破率：  <input type="number" name="PROGRESS" value=""　size="2" maxlength="3">
        <br>               
-               開始日：  <input type="date" name="STARTDATE">
-               終了日：  <input type="date" name="ENDDATE">
+               開始日：  <input type="date" name="STARTDATE"　value="">
+               終了日：  <input type="date" name="ENDDATE"　value="">
                評価：
-       <SELECT NAME="EVALUATION">
+       <SELECT NAME="EVALUATION"　value="NULL">
          <OPTION VALUE="NULL"></OPTION>
          <OPTION VALUE="0">高</OPTION>
          <OPTION VALUE="1">低</OPTION>
@@ -44,7 +45,7 @@
     
     <div class="editCenter_display">
       <form  method="POST" name="bookRegister_form">
-        <input type="submit" style="width:160px; height:35px" value="登録">
+        <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
       </form>
     </div>
     <div class="editCenter_display">

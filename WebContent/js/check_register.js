@@ -1,4 +1,4 @@
-function onButtonClick(){
+function onRegisterClick(){
     //入力項目を設定
 	var title = edit_form.TITLE.value;
     var progress = edit_form.PROGRESS.value;
@@ -13,14 +13,17 @@ function onButtonClick(){
     var enddate_mes = '終了日';
     var evaluation_mes = '評価';
 
+    // 読破率の最大値を設定
+    var progress_max = 100;
+    
     //必須チェック
     if (title == ""){
         alert(title_mes + "を入力してください。");
         return false;
     }else{
-    	//読破率のフォーマットチェック
-    	if (progress.match(/[^0-9]+/)) {
-    		alert(progress_mes + "は半角数字のみ入力可能です。修正してください。");
+    	//読破率の範囲チェック
+    	if (progress != "" &&  progress > progress_max) {
+    		alert(progress_mes + "は「0～100」の範囲で設定してください。");
     		return false;
     	}else{
     		//開始日と終了日の相関チェック
@@ -29,10 +32,10 @@ function onButtonClick(){
     			return false;
     		}else{
     			//開始日のフォーマットチェック
-    			if (!startdate.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/)){
+    			if (startdate != "" && !startdate.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/)){
     				alert(startdate_mes + "は「西暦/月/日」で設定してください。");
     				return false;
-    			}else{
+    			}else if(startdate != ""){
     				var y = startdate.split("/")[0];
         			var m = startdate.split("/")[1] - 1;
         			var d = startdate.split("/")[2];
@@ -43,10 +46,10 @@ function onButtonClick(){
         				return false;
         			}else{
         				//終了日のフォーマットチェック
-        				if (!enddate.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/)){
+        				if (enddate !== "" && !enddate.match(/^\d{4}\/\d{1,2}\/\d{1,2}$/)){
         					alert(enddate_mes + "は「西暦/月/日」で設定してください。");
         					return false;
-        				}else{
+        				}else if(enddate !== ""){
         					var y = enddate.split("/")[0];
         					var m = enddate.split("/")[1] - 1;
             				var d = enddate.split("/")[2];
@@ -55,9 +58,6 @@ function onButtonClick(){
             				if(date.getFullYear() != y || date.getMonth() != m || date.getDate() != d){
             					alert(enddate_mes + "は「西暦/月/日」で設定してください。");
             					return false;
-            				}else{
-            					//チェックが問題がなければ正常とする。
-            					return true;
             				}
         				}
         			}
