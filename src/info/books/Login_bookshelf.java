@@ -54,10 +54,11 @@ public class Login_bookshelf extends HttpServlet {
 			result = stmt.executeQuery(sql);
 
 			if(result.next()) {
-				request.setAttribute("userid",id);
-				
+				//セッションにユーザーIDとユーザー名をセット
 				username = result.getString("USERNAME");
 				HttpSession session = request.getSession(true);
+				
+				session.setAttribute("userid",id);
 				session.setAttribute("name",username);
 				
 				RequestDispatcher Bookshelf = request.getRequestDispatcher("/init_bookshelf");

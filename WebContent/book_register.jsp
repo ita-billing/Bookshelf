@@ -14,7 +14,7 @@
 	  String name = (String)session.getAttribute("name");
 	%>
 
-	<form action="<%=request.getContextPath()%>/logout" method="POST">
+	<form action="<%=request.getContextPath()%>/logout" method="POST" name="logout_form">
       <th>ユーザー名: <%= name %> </th>
       <br>
       <input type="submit" value="ログアウト" onClick="return onLogoutButton();">
@@ -49,7 +49,7 @@
       </form>
     </div>
     <div class="editCenter_display">
-      <form  method="POST" name="bookRegister_form">
+      <form action="<%=request.getContextPath()%>/init_bookshelf" method="POST" name="bookRegister_form">
         <input type="submit" style="width:160px; height:35px" value="戻る">
       </form>
     </div>

@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Init_bookshelf extends HttpServlet {
 	
@@ -43,7 +44,8 @@ public class Init_bookshelf extends HttpServlet {
 			stmt = conn.createStatement();
 
 			// ユーザーIDをセット
-			userid = (String) request.getAttribute("userid");
+			HttpSession session = request.getSession(true);
+			userid = (String) session.getAttribute("userid");
 			
 			// SQL文作成：ユーザーIDに紐づく本の一覧を取得
 			String sql = "SELECT "
