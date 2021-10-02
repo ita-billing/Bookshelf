@@ -45,6 +45,7 @@
     
     <div class="editCenter_display">
       <form  method="POST" name="bookRegister_form">
+        <input type="hidden" name="mode" value="add">
         <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
       </form>
     </div>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.naming.InitialContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +53,34 @@ public class Check_register extends HttpServlet {
 				
 				// SQL文作成：入力情報に紐づく本の情報をカウントする。
 				String sql = "SELECT "
-						　　　　 +"  COUNT(*)"
+						      +"  COUNT(*)"
 						      +"  FROM"
 						      +"  BOOKSHELF"
 						      +"  WHERE"
+						      +"  ID = :ID"
+						      +"  AND TITLE = :TITLE"
+						      +"  AND AUTHORNAME = :AUTHORNAME"
+						      +"  AND PROGRESS = :PROGRESS"
+						      +"  AND STARTDATE = :STARTDATE"
+						      +"  AND ENDDATE = :ENDDATE"
+						      +"  AND EVALUATION = :EVALUATION";
+				
+				// SQLを実行して結果を格納
+				rs = stmt.executeQuery(sql);
+								
+				if(rs.next()) {
+					// 例外処理
+					String message ="エラーが発生しました。再度ログインし直してください。";
+					request.setAttribute("message", message);
+					
+				}else {
+					message ="該当するユーザーが見つかりませんでした。";
+					
+					request.setAttribute("message", message);
+					request.setAttribute("screen",screen);
+					
+					request.getRequestDispatcher(screen).forward(request, response);
+				}
 			}
 			
 		}
