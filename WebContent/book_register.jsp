@@ -27,28 +27,27 @@
 
          以下から登録できます。
     <div class="editCenter_display">
-    <form  name="edit_form">
-               タイトル: <input type="text" name="TITLE" value=""　maxlength="50">
-               作者：  <input type="text" name="AUTHORNAME" value=""　maxlength="50">
-               読破率：  <input type="number" name="PROGRESS" value=""　size="2" maxlength="3">
+    <form action="<%=request.getContextPath()%>/check_register" method="POST" name="edit_form">
+               タイトル: <input type="text" name="TITLE" maxlength="50">
+               作者：  <input type="text" name="AUTHORNAME" maxlength="50">
+               読破率：  <input type="number" name="PROGRESS" size="2" maxlength="3">
        <br>               
-               開始日：  <input type="date" name="STARTDATE"　value="">
-               終了日：  <input type="date" name="ENDDATE"　value="">
+               開始日：  <input type="date" name="STARTDATE">
+               終了日：  <input type="date" name="ENDDATE">
                評価：
-       <SELECT NAME="EVALUATION"　value="NULL">
-         <OPTION VALUE="NULL"></OPTION>
+       <SELECT NAME="EVALUATION">
+         <OPTION VALUE=""></OPTION>
          <OPTION VALUE="0">高</OPTION>
          <OPTION VALUE="1">低</OPTION>
        </SELECT>
-      </form>
-    </div>
     
-    <div class="editCenter_display">
-      <form  method="POST" name="bookRegister_form">
-        <input type="hidden" name="mode" value="add">
-        <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
-      </form>
-    </div>
+      <div class="editCenter_display">
+          <input type="hidden" name="mode" value="add">
+          <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
+      </div>
+    </form>
+    </div>  
+
     <div class="editCenter_display">
       <form action="<%=request.getContextPath()%>/init_bookshelf" method="POST" name="bookRegister_form">
         <input type="submit" style="width:160px; height:35px" value="戻る">

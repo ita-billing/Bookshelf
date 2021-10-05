@@ -34,10 +34,9 @@ public class Check_register extends HttpServlet {
 			// 初期設定
 			Connection conn = null;
 			Statement stmt = null;
-			ResultSet rs = null;
+			ResultSet rs = null;	
 			
-			String userid = null;
-			String count = null;
+			int registerCount = -1;
 			String message = null;
 			
 			request.setCharacterEncoding("UTF-8");
@@ -46,43 +45,70 @@ public class Check_register extends HttpServlet {
 				// DB接続
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-
-				// ユーザーIDをセット
+				
+				// セッションからユーザーIDをセット
 				HttpSession session = request.getSession(true);
-				userid = (String) session.getAttribute("userid");
+				String userid = (String) session.getAttribute("userid");
+
+				// 入力値をセット
+				String title =  request.getParameter("TITLE");
+				String authorname =  request.getParameter("AUTHORNAME");
+				String progress =  request.getParameter("PROGRESS");
+				String startdate =  request.getParameter("STARTDATE");
+				String enddate =  request.getParameter("ENDDATE");
+				String evaluation =  request.getParameter("EVALUATION");
 				
 				// SQL文作成：入力情報に紐づく本の情報をカウントする。
-				String sql = "SELECT "
-						      +"  COUNT(*)"
-						      +"  FROM"
-						      +"  BOOKSHELF"
-						      +"  WHERE"
-						      +"  ID = :ID"
-						      +"  AND TITLE = :TITLE"
-						      +"  AND AUTHORNAME = :AUTHORNAME"
-						      +"  AND PROGRESS = :PROGRESS"
-						      +"  AND STARTDATE = :STARTDATE"
-						      +"  AND ENDDATE = :ENDDATE"
-						      +"  AND EVALUATION = :EVALUATION";
+				String sql = "SELECT"
+						      +" COUNT(*) AS COUNT"
+						      +" FROM"
+						      +" BOOKSHELF"
+						      +" WHERE"
+						      +" ID = '" + userid + "'"
+						      +"  AND TITLE = '" + title + "'"
+						      +"  AND AUTHORNAME = '" + authorname + "'"
+						      +"  AND PROGRESS = '" + progress + "'"
+						      +"  AND STARTDATE = '" + startdate + "'"
+						      +"  AND ENDDATE = '" + enddate + "'"
+						      +"  AND EVALUATION = '" + evaluation + "'";
 				
 				// SQLを実行して結果を格納
 				rs = stmt.executeQuery(sql);
-								
+												
 				if(rs.next()) {
-					// 例外処理
-					String message ="エラーが発生しました。再度ログインし直してください。";
-					request.setAttribute("message", message);
+					//取得した件数を格納
+					registerCount = rs.getInt("COUNT");
 					
-				}else {
-					message ="該当するユーザーが見つかりませんでした。";
+					if(registerCount == 0) {
+						//入力値をセット
+						request.setAttribute("title",title);
+						request.setAttribute("authorname",authorname);
+						request.setAttribute("progress",progress);
+						request.setAttribute("startdate",startdate);
+						request.setAttribute("enddate",enddate);
+						request.setAttribute("evaluation",evaluation);
+						
+						RequestDispatcher BookAdd = request.getRequestDispatcher("/book_add");
+						BookAdd.forward(request, response);
 					
-					request.setAttribute("message", message);
-					request.setAttribute("screen",screen);
-					
-					request.getRequestDispatcher(screen).forward(request, response);
+					}else{
+						// 0件以外は同じ内容が登録済みと判断する。
+						message ="同じ内容が登録されていたため、登録が失敗しました。登録内容を再確認してください。";
+						request.setAttribute("message", message);
+						request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+					}
 				}
+			}catch(Exception e) {
+				// 例外処理
+				message ="エラーが発生しました。再度ログインし直してください。";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+			}finally {
+				try {
+					// DBの接続をクローズ
+					conn.close();
+				}catch (Exception e) {
 			}
-			
 		}
-
+	}
 }

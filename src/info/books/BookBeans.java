@@ -2,14 +2,16 @@ package info.books;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class BookBeans {
 	
-	//項目の
+	// 項目の値
 	private String seqid;
 	private String title;
 	private String authorname;
@@ -17,6 +19,9 @@ public class BookBeans {
 	private String startdate;
 	private String enddate;
 	private String evaluation;
+
+	// 項目の値（セッション）
+	private String userid;
 	
 	// DB関連の初期設定
     private Connection conn = null;
@@ -35,8 +40,18 @@ public class BookBeans {
 		setStartdate(request.getParameter("STARTDATE"));
 		setEnddate(request.getParameter("ENDDATE"));
 		setEvaluation(request.getParameter("EVALUATION"));
+		
+		// セッションから取得
+		HttpSession session = request.getSession(true);
+		userid = (String) session.getAttribute("userid");
 	}
 
+    public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getSeqid() {
 		return seqid;
 	}
@@ -104,53 +119,17 @@ public class BookBeans {
     	pstmt.close();
     	conn.close();
     }
-	
-	public Boolean addData() {
-		try {
-			
-			// sql文 の作成
-			String sql = "INSERT INTO BOOKSHELF( "
-					+"  ID,"
-					+"  TITLE,"
-					+"  AUTHORNAME,"
-					+"  PROGRESS,"
-					+"  STARTDATE,"
-					+"  ENDDATE,"
-					+"  EVALUATION,"
-					+"  CREATEDATE,"
-					+"  UPDATEDATE"
-					+"  )"
-			        +"  VALUES ('" 
-					+ ID 
-			        + "','" + TITLE 
-			        + "','" + AUTHORNAME 
-			        + "','" + PROGRESS 
-			        + "','" + STARTDATE 
-			        + "','" + ENDDATE
-			        + "','" + EVALUATION 
-			        + "',now()"
-			        + "',now())";
 
-			// データベース接続＆sqlの実行
-			doDataBase(sql);
-			
-			// sqlの実行結果の確認
-			if (result == 1) {
-				return true;
-			}else{
-				return false;
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public Boolean deleteData() {
+	public boolean deleteData() {
 	    try {
             // sql文 の作成
-            String sql = "DELETE FROM SHAIN_TABLE WHERE ID = " + id;
+            String sql = "DELETE "
+		      +"  FROM"
+		      +"  BOOKSHELF"
+		      +"  WHERE"
+		      +"  ID = '" + userid + "'"
+		      +"  AND SEQID = '" + seqid + "'";
+
 
             // データベース接続＆sqlの実行
             doDataBase(sql);
@@ -168,13 +147,31 @@ public class BookBeans {
         }
     }
 
-	public Boolean updateData() {
+	public boolean updateData() {
 		try {
 			
 			// sql文 の作成
-			String sql = "UPDATE SHAIN_TABLE SET " 
-			        + "name = '" + name + "', sei = '" + sei + "', nen = '" + nen + "', address ='" + address + "', updateuser = '" + username + "', updatetime = now() "
-					+ "WHERE id = '" + id + "'";
+			String sql = "UPDATE BOOKSHELF SET"
+					+"  ID,"
+					+"  TITLE,"
+					+"  AUTHORNAME,"
+					+"  PROGRESS,"
+					+"  STARTDATE,"
+					+"  ENDDATE,"
+					+"  EVALUATION,"
+					+"  CREATEDATE,"
+					+"  UPDATEDATE"
+					+"  )"
+			        +"  VALUES ('" 
+					+ userid 
+			        + "','" + title 
+			        + "','" + authorname 
+			        + "','" + progress 
+			        + "','" + startdate 
+			        + "','" + enddate
+			        + "','" + evaluation 
+			        + "',now()"
+			        + "',now())";
 
 			// データベース接続＆sqlの実行
 			doDataBase(sql);
@@ -190,5 +187,5 @@ public class BookBeans {
 			e.printStackTrace();
 			return false;
 		}
-
+	}
 }
