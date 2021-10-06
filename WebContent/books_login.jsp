@@ -18,11 +18,11 @@
     <div class="center_display">
     <form action="<%=request.getContextPath()%>/login" method="POST" name="login_form">
              ユーザーID：
-      <input type="text" name="user_id" value="" size="24" maxlength="5"/>
+      <input type="text" name="user_id" value="" size="24" maxlength="5" value = '00001'/>
     <br>
     <br>
              パスワード：
-      <input type="password" name="password" value="" size="24" maxlength="10"/>
+      <input type="password" name="password" value="" size="24" maxlength="10" value = 'testpass'/>
     <br>
     <br>
       <input type="submit" value="ログイン" onClick="return onButtonClick();">

@@ -20,7 +20,7 @@
 </div>
 
 </head>
-<body>
+<body class="background_color">
     <h2>処理結果</h2>
 
 	<%

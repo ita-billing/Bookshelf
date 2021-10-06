@@ -37,6 +37,13 @@ public class Check_register extends HttpServlet {
 			ResultSet rs = null;	
 			
 			int registerCount = -1;
+			
+			// 未設定時の条件設定の変数を定義
+			String authornameCheck = null;
+			String startdateCheck = null;
+			String enddateCheck  = null;
+			String evaluationCheck  = null;
+			
 			String message = null;
 			
 			request.setCharacterEncoding("UTF-8");
@@ -58,6 +65,43 @@ public class Check_register extends HttpServlet {
 				String enddate =  request.getParameter("ENDDATE");
 				String evaluation =  request.getParameter("EVALUATION");
 				
+				// 作者名未設定時はNULLを設定
+				if(authorname == "") {
+					authorname = "NULL";
+					authornameCheck = "IS NULL";
+				}else {
+					authornameCheck = "= '" + authorname + "'";
+				}
+				
+				// 読破率未設定時は0%に設定
+				if(progress == "") {
+					progress ="0";
+				}
+				
+				// 開始日未設定時はNULLを設定
+				if(startdate == "") {
+					startdate = "NULL";
+					startdateCheck = "IS NULL";
+				}else {
+					startdateCheck = "= '" + startdate + "'";
+				}
+				
+				// 開始日未設定時はNULLを設定
+				if(enddate == "") {
+					enddate = "NULL";
+					enddateCheck = "IS NULL";
+				}else {
+					enddateCheck = "= '" + enddate + "'";
+				}
+				
+				// 評価が未設定の場合、登録できる値に設定
+				if(evaluation == "") {
+					evaluation = "NULL";
+					evaluationCheck = "IS NULL";
+				}else {
+					evaluationCheck = "= '" + evaluation + "'";
+				}
+				
 				// SQL文作成：入力情報に紐づく本の情報をカウントする。
 				String sql = "SELECT"
 						      +" COUNT(*) AS COUNT"
@@ -65,12 +109,12 @@ public class Check_register extends HttpServlet {
 						      +" BOOKSHELF"
 						      +" WHERE"
 						      +" ID = '" + userid + "'"
-						      +"  AND TITLE = '" + title + "'"
-						      +"  AND AUTHORNAME = '" + authorname + "'"
-						      +"  AND PROGRESS = '" + progress + "'"
-						      +"  AND STARTDATE = '" + startdate + "'"
-						      +"  AND ENDDATE = '" + enddate + "'"
-						      +"  AND EVALUATION = '" + evaluation + "'";
+						      +" AND TITLE = '" + title + "'"
+						      +" AND AUTHORNAME "  + authornameCheck
+						      +" AND PROGRESS = '" + progress + "'"
+						      +" AND STARTDATE " + startdateCheck
+						      +" AND ENDDATE " + enddateCheck
+						      +" AND EVALUATION " + evaluationCheck;
 				
 				// SQLを実行して結果を格納
 				rs = stmt.executeQuery(sql);

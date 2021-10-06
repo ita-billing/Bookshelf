@@ -67,12 +67,8 @@ DataSource ds;
 			enddate = (String) request.getAttribute("enddate");
 			evaluation = (String) request.getAttribute("evaluation");
 			
-			if(progress == "") {
-				progress ="0";
-			}
-			
 			// sql文 の作成
-			String addsql = "INSERT INTO BOOKSHELF( "
+			String addsql = "INSERT INTO BOOKSHELF("
 					+" ID,"
 					+" TITLE,"
 					+" AUTHORNAME,"
@@ -86,12 +82,12 @@ DataSource ds;
 			        +" VALUES ('" 
 					+ userid 
 			        + "','" + title 
-			        + "','" + authorname 
-			        + "','" + progress 
-			        + "','" + startdate 
-			        + "','" + enddate
-			        + "','" + evaluation 
-			        + "',now()"
+			        + "'," + authorname 
+			        + ",'" + progress 
+			        + "'," + startdate  
+			        + "," + enddate 
+			        + "," + evaluation 
+			        + ",now()"
 			        + ",now())";
 			
 			// データベース接続＆addsqlの実行
