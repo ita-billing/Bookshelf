@@ -71,6 +71,7 @@ public class Check_register extends HttpServlet {
 					authornameCheck = "IS NULL";
 				}else {
 					authornameCheck = "= '" + authorname + "'";
+					authorname = "'" + authorname + "'";
 				}
 				
 				// 読破率未設定時は0%に設定
@@ -84,6 +85,7 @@ public class Check_register extends HttpServlet {
 					startdateCheck = "IS NULL";
 				}else {
 					startdateCheck = "= '" + startdate + "'";
+					startdate = "'" + startdate + "'";
 				}
 				
 				// 開始日未設定時はNULLを設定
@@ -92,6 +94,7 @@ public class Check_register extends HttpServlet {
 					enddateCheck = "IS NULL";
 				}else {
 					enddateCheck = "= '" + enddate + "'";
+					enddate = "'" + enddate + "'";
 				}
 				
 				// 評価が未設定の場合、登録できる値に設定
@@ -100,6 +103,7 @@ public class Check_register extends HttpServlet {
 					evaluationCheck = "IS NULL";
 				}else {
 					evaluationCheck = "= '" + evaluation + "'";
+					evaluation = "'" + evaluation + "'";
 				}
 				
 				// SQL文作成：入力情報に紐づく本の情報をカウントする。
@@ -139,7 +143,7 @@ public class Check_register extends HttpServlet {
 						// 0件以外は同じ内容が登録済みと判断する。
 						message ="同じ内容が登録されていたため、登録が失敗しました。登録内容を再確認してください。";
 						request.setAttribute("message", message);
-						request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+						request.getRequestDispatcher("/book_result.jsp").forward(request, response);
 					}
 				}
 			}catch(Exception e) {
