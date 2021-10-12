@@ -34,17 +34,14 @@ public class Check_register extends HttpServlet {
 			// 初期設定
 			Connection conn = null;
 			Statement stmt = null;
-			ResultSet rs = null;	
-			
-			int registerCount = -1;
-			
-			// 未設定時の条件設定の変数を定義
-			String authornameCheck = null;
-			String startdateCheck = null;
-			String enddateCheck  = null;
-			String evaluationCheck  = null;
-			
+			ResultSet rs = null;
 			String message = null;
+			
+			// SQL文の作成のための変数
+			StringBuilder sb = new StringBuilder();
+			
+			// カウントの変数の初期設定
+			int registerCount = -1;
 			
 			request.setCharacterEncoding("UTF-8");
 			
@@ -65,12 +62,15 @@ public class Check_register extends HttpServlet {
 				String enddate =  request.getParameter("ENDDATE");
 				String evaluation =  request.getParameter("EVALUATION");
 				
+				// SQL文作成：入力情報に紐づく本の情報をカウントする。
+				sb.append("SELECT COUNT(*) AS COUNT FROM BOOKSHELF WHERE ID = '" + userid + "' AND TITLE = '" + title + "' ");
+				
 				// 作者名未設定時はNULLを設定
 				if(authorname == "") {
+					sb.append("AND AUTHORNAME IS NULL ");
 					authorname = "NULL";
-					authornameCheck = "IS NULL";
 				}else {
-					authornameCheck = "= '" + authorname + "'";
+					sb.append("AND AUTHORNAME = '" + authorname + "' ");
 					authorname = "'" + authorname + "'";
 				}
 				
@@ -78,49 +78,37 @@ public class Check_register extends HttpServlet {
 				if(progress == "") {
 					progress ="0";
 				}
+				sb.append("AND PROGRESS = '" + progress + "' ");
 				
 				// 開始日未設定時はNULLを設定
 				if(startdate == "") {
+					sb.append("AND STARTDATE IS NULL ");
 					startdate = "NULL";
-					startdateCheck = "IS NULL";
 				}else {
-					startdateCheck = "= '" + startdate + "'";
+					sb.append("AND STARTDATE = '" + startdate + "' ");
 					startdate = "'" + startdate + "'";
 				}
 				
 				// 開始日未設定時はNULLを設定
 				if(enddate == "") {
+					sb.append("AND ENDDATE IS NULL ");
 					enddate = "NULL";
-					enddateCheck = "IS NULL";
 				}else {
-					enddateCheck = "= '" + enddate + "'";
+					sb.append("AND ENDDATE = '" + enddate + "' ");
 					enddate = "'" + enddate + "'";
 				}
 				
 				// 評価が未設定の場合、登録できる値に設定
 				if(evaluation == "") {
+					sb.append("AND EVALUATION IS NULL ");
 					evaluation = "NULL";
-					evaluationCheck = "IS NULL";
 				}else {
-					evaluationCheck = "= '" + evaluation + "'";
+					sb.append("AND EVALUATION = '" + evaluation + "' ");
 					evaluation = "'" + evaluation + "'";
 				}
-				
-				// SQL文作成：入力情報に紐づく本の情報をカウントする。
-				String sql = "SELECT"
-						      +" COUNT(*) AS COUNT"
-						      +" FROM"
-						      +" BOOKSHELF"
-						      +" WHERE"
-						      +" ID = '" + userid + "'"
-						      +" AND TITLE = '" + title + "'"
-						      +" AND AUTHORNAME "  + authornameCheck
-						      +" AND PROGRESS = '" + progress + "'"
-						      +" AND STARTDATE " + startdateCheck
-						      +" AND ENDDATE " + enddateCheck
-						      +" AND EVALUATION " + evaluationCheck;
-				
+								
 				// SQLを実行して結果を格納
+				String sql = sb.toString();
 				rs = stmt.executeQuery(sql);
 												
 				if(rs.next()) {
