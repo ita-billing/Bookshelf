@@ -67,16 +67,16 @@
     <br>
     <div class="editCenter_display">
     <form action="/jsp_servlet_test/Edit" method="POST" name="edit_form">
-                           タイトル: <input type="text" name="TITLE" value="<%=books.getTitle()%>"> 
-                           作者：  <input type="text" name="AUTHORNAME" value="<%=books.getAuthorname()%>">
-                           読破率：  <input type="text" name="PROGRESS" value="<%=books.getProgress()%>" size="2">
+                           タイトル: <input type="text" name="TITLE" maxlength="50" value="<%=books.getTitle()%>"> 
+                           作者：  <input type="text" name="AUTHORNAME" maxlength="50" value="<%=books.getAuthorname()%>">
+                           読破率：  <input type="text" name="PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>" size="2">
             <br>               
-                           開始日：  <input type="text" name="STARTDATE" value="<%=books.getStartdate()%>">
-                           終了日：  <input type="text" name="ENDDATE" value="<%=books.getEnddate()%>">
+                           開始日：  <input type="date" name="STARTDATE" value="<%=books.getStartdate()%>">
+                           終了日：  <input type="date" name="ENDDATE" value="<%=books.getEnddate()%>">
                            評価：
             <SELECT NAME="EVALUATION">
               <OPTION VALUE="<%=books.getEvaluation()%>" selected><%=books.getEvaluation()%></OPTION>
-              <OPTION VALUE="NULL"></OPTION>
+              <OPTION VALUE=""></OPTION>
               <OPTION VALUE="0">高</OPTION>
               <OPTION VALUE="1">低</OPTION>
             </SELECT> 
@@ -85,10 +85,10 @@
     
     <div class="editCenter_display">
       <form  method="POST" name="bookEdit_form">
-        <input type="submit" style="width:160px; height:35px" value="編集">
+        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集">
       </form>
       <form  method="POST" name="bookDelete_form">
-        <input type="submit" style="width:160px; height:35px" value="削除">
+        <input class="button_line" type="submit" style="width:160px; height:35px" value="削除">
       </form>
     </div>
 
