@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script type="text/javascript" src="js/check_input.js"></script>
+<script type="text/javascript" src="js/check_delete.js"></script>
 <script type="text/javascript" src="js/logout.js"></script>
 <title>編集画面</title>
 <h2>編集</h2>
@@ -15,7 +17,7 @@
 	  BookBeans books = (BookBeans) request.getAttribute("books");
 	%>
 	
-	<form action="<%=request.getContextPath()%>/logout" method="POST">
+	<form action="<%=request.getContextPath()%>/logout" method="POST" name="logout_form">
       <th>ユーザー名: <%= name %> </th>
       <br>
       <input type="submit" value="ログアウト" onClick="return onLogoutButton();">
@@ -33,7 +35,7 @@
         <td class="table_hidden">ID</td>
         <td class="table_header">タイトル</td>
         <td class="table_header">作者</td>
-        <td class="table_header center_display">読破率</td>
+        <td class="table_header center_display">読破率（%）</td>
         <td class="table_header center_display">開始日</td>
         <td class="table_header center_display">終了日</td>
         <td class="table_header center_display">評価</td>
@@ -66,10 +68,10 @@
           以下から変更できます。
     <br>
     <div class="editCenter_display">
-    <form action="/jsp_servlet_test/Edit" method="POST" name="edit_form">
+    <form action="<%=request.getContextPath()%>/check_edit" method="POST" name="edit_form">
                            タイトル: <input type="text" name="TITLE" maxlength="50" value="<%=books.getTitle()%>"> 
                            作者：  <input type="text" name="AUTHORNAME" maxlength="50" value="<%=books.getAuthorname()%>">
-                           読破率：  <input type="text" name="PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>" size="2">
+                           読破率（%）：  <input type="text" name="PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>" size="2">
             <br>               
                            開始日：  <input type="date" name="STARTDATE" value="<%=books.getStartdate()%>">
                            終了日：  <input type="date" name="ENDDATE" value="<%=books.getEnddate()%>">
@@ -80,20 +82,19 @@
               <OPTION VALUE="0">高</OPTION>
               <OPTION VALUE="1">低</OPTION>
             </SELECT> 
+    
+      <div class="editCenter_display">
+        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集" onClick="return onInputClick();">
+    </form>
+
+    <form method="POST" name="bookDelete_form">
+      <input class="button_line" type="submit" style="width:160px; height:35px" value="削除"  onClick="return onDeleteClick();">
     </form>
     </div>
-    
-    <div class="editCenter_display">
-      <form  method="POST" name="bookEdit_form">
-        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集">
-      </form>
-      <form  method="POST" name="bookDelete_form">
-        <input class="button_line" type="submit" style="width:160px; height:35px" value="削除">
-      </form>
     </div>
 
     <div class="editCenter_display">
-      <form action="<%=request.getContextPath()%>/Init_bookshelf" method="POST" name="backbookshelf_form">
+      <form action="<%=request.getContextPath()%>/init_bookshelf" method="POST" name="backbookshelf_form">
         <input type="submit" style="width:320px; height:35px" value="戻る">
       </form>
     </div>

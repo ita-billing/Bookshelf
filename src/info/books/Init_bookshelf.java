@@ -57,7 +57,7 @@ public class Init_bookshelf extends HttpServlet {
 					      +"   END AS AUTHORNAME"
 					      +"  ,CASE"
 					      +"    WHEN PROGRESS IS NULL THEN ''"
-					      +"    ELSE CONCAT(PROGRESS,'%')"
+					      +"    ELSE PROGRESS"
 					      +"   END AS PROGRESS"
 					      +"  ,CASE"
 					      +"    WHEN STARTDATE IS NULL THEN ''"

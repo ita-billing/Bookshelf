@@ -50,7 +50,10 @@
 		<servlet-name>InitEdit</servlet-name>
 		<servlet-class>info.books.Init_edit</servlet-class>
     </servlet>
-
+	<servlet>
+		<servlet-name>CheckEdit</servlet-name>
+		<servlet-class>info.books.Check_edit</servlet-class>
+    </servlet>
     <servlet-mapping>
 		<servlet-name>LoginBookshelf</servlet-name>
 		<url-pattern>/login</url-pattern>
@@ -91,5 +94,8 @@
 		<servlet-name>InitEdit</servlet-name>
 		<url-pattern>/init_edit</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>CheckEdit</servlet-name>
+		<url-pattern>/check_edit</url-pattern>
+	</servlet-mapping>
 </web-app>

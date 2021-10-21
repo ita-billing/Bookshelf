@@ -33,7 +33,7 @@
         <td class="table_hidden">ID</td>
         <td class="table_header">タイトル</td>
         <td class="table_header">作者</td>
-        <td class="table_header center_display">読破率</td>
+        <td class="table_header center_display">読破率（%）</td>
         <td class="table_header center_display">開始日</td>
         <td class="table_header center_display">終了日</td>
         <td class="table_header center_display">評価</td>

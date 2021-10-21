@@ -1,4 +1,4 @@
-function onRegisterClick(){
+function onInputClick(){
     //入力項目を設定
 	var title = edit_form.TITLE.value;
     var progress = edit_form.PROGRESS.value;

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script type="text/javascript" src="js/check_register.js"></script>
+<script type="text/javascript" src="js/check_input.js"></script>
 <script type="text/javascript" src="js/logout.js"></script>
 <title>登録</title>
 <h2>登録</h2>
@@ -30,7 +30,7 @@
     <form action="<%=request.getContextPath()%>/check_register" method="POST" name="edit_form">
                タイトル: <input type="text" name="TITLE" maxlength="50">
                作者：  <input type="text" name="AUTHORNAME" maxlength="50">
-               読破率：  <input type="number" name="PROGRESS" size="2" maxlength="3">
+               読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3">
        <br>               
                開始日：  <input type="date" name="STARTDATE">
                終了日：  <input type="date" name="ENDDATE">
@@ -43,7 +43,7 @@
     
       <div class="editCenter_display">
           <input type="hidden" name="mode" value="add">
-          <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
+          <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onInputClick();">
       </div>
     </form>
     </div>  

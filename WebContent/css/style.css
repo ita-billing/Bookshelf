@@ -31,3 +31,7 @@
 .table_hidden {
     display:none;
 }
+
+.button_line{
+	margin: 0 35px;
+}
