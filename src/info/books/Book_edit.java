@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-public class Book_add extends HttpServlet {
+public class Book_edit extends HttpServlet {
 	
 	// データソースを設定
 	DataSource ds;
@@ -28,7 +28,7 @@ public class Book_add extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	  throws ServletException,IOException{
+			  throws ServletException,IOException{
 		
 		// 初期設定
 		Connection conn = null;
@@ -36,6 +36,7 @@ public class Book_add extends HttpServlet {
 		
 		// 設定値の初期設定
 		String userid = null;
+		String seqid = null;
 		String title = null;
 		String authorname = null;
 		String progress = null;
@@ -51,15 +52,16 @@ public class Book_add extends HttpServlet {
 		
 		try {
 			
-			// DB接続
+			// DBの接続
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
 			
-			// セッションからユーザーIDをセット
+			// セッションからユーザーIDを設定
 			HttpSession session = request.getSession(true);
 			userid = (String) session.getAttribute("userid");
 			
-			// 入力値をセット
+			// 入力項目の設定
+			seqid = (String) request.getAttribute("seqid");
 			title = (String) request.getAttribute("title");
 			authorname = (String) request.getAttribute("authorname");
 			progress = (String) request.getAttribute("progress");
@@ -67,54 +69,44 @@ public class Book_add extends HttpServlet {
 			enddate = (String) request.getAttribute("enddate");
 			evaluation = (String) request.getAttribute("evaluation");
 			
-			// sql文 の作成
-			String addsql = "INSERT INTO BOOKSHELF("
-					+" ID,"
-					+" TITLE,"
-					+" AUTHORNAME,"
-					+" PROGRESS,"
-					+" STARTDATE,"
-					+" ENDDATE,"
-					+" EVALUATION,"
-					+" CREATEDATE,"
-					+" UPDATEDATE"
-					+")"
-			        +" VALUES ('" 
-					+ userid 
-			        + "','" + title 
-			        + "'," + authorname 
-			        + ",'" + progress 
-			        + "'," + startdate  
-			        + "," + enddate 
-			        + "," + evaluation 
-			        + ",now()"
-			        + ",now())";
+			// // SQL文作成：選択している本の情報を更新する。
+			String editsql = "UPDATE BOOKSHELF SET"
+					+" TITLE      = " + title
+					+",AUTHORNAME = " + authorname
+					+",PROGRESS   = " + progress
+					+",STARTDATE  = " + startdate
+					+",ENDDATE    = " + enddate
+					+",EVALUATION = " + evaluation
+					+",UPDATEDATE = NOW()"
+					+" WHERE"
+					+" SEQID    = " + seqid
+					+" AND ID = " + userid;
 			
-			// データベース接続＆addsqlの実行
-			result = stmt.executeUpdate(addsql);
+			// SQLの実行
+			result = stmt.executeUpdate(editsql);
 			
-			// addsqlの実行結果の確認
+			// SQLの実行結果を確認
 			if (result == 1) {
-				message ="登録成功。";
-			}else{
-				message ="登録に失敗しました。登録内容が正しいか、再確認してください。";
+				message = "更新成功。";
+			}else {
+				message = "更新に失敗しました。更新内容が正しいか再確認して、再度編集画面から更新してください。";
 			}
 			
 			// 結果画面に遷移
 			request.setAttribute("message", message);
-          request.getRequestDispatcher("/book_result.jsp").forward(request, response);
-		
-		}catch(Exception e) {
+			//request.getRequestDispatcher("/book_result.jsp").forward(request, response);
+			
+		}catch (Exception e){
 			// 例外処理
-			message ="エラーが発生しました。再度ログインし直してください。";
-			request.setAttribute("message", message);
-			request.getRequestDispatcher("/books_login.jsp").forward(request, response);
-		}finally {
+			message = "エラーが発生しました。再度ログインし直してください。";
+			request.setAttribute("message",message);
+			request.getRequestDispatcher("/books_login.jsp").forward(request,response);
+		}finally{
 			try {
 				// DBの接続をクローズ
 				conn.close();
-			}catch (Exception e) {
+			}catch (Exception e) {	
 			}
-		}
+		}		
 	}
 }

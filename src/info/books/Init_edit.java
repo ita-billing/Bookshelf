@@ -11,20 +11,20 @@ import info.books.BookBeans;
 
 public class Init_edit extends HttpServlet {
 	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException,IOException{
 		
 		// 初期設定
 		String message = null;
-				
-		request.setCharacterEncoding("UTF-8");
 		
         // JavaBeansの初期化
 		BookBeans books = new BookBeans(request);
-			
+		
+		request.setCharacterEncoding("UTF-8");
+		
 		try {
 			
+			//リクエストスコープにJavaBeansの値を保存
 			request.setAttribute("books", books);
 			request.getRequestDispatcher("/book_edit.jsp").forward(request, response);
 					

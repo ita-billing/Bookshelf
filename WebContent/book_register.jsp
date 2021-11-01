@@ -35,14 +35,13 @@
                開始日：  <input type="date" name="STARTDATE">
                終了日：  <input type="date" name="ENDDATE">
                評価：
-       <SELECT NAME="EVALUATION">
-         <OPTION VALUE=""></OPTION>
-         <OPTION VALUE="0">高</OPTION>
-         <OPTION VALUE="1">低</OPTION>
+       <SELECT name="EVALUATION">
+         <OPTION value=""></OPTION>
+         <OPTION value="0">高</OPTION>
+         <OPTION value="1">低</OPTION>
        </SELECT>
     
       <div class="editCenter_display">
-          <input type="hidden" name="mode" value="add">
           <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onInputClick();">
       </div>
     </form>
