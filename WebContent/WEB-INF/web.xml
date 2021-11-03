@@ -58,6 +58,10 @@
 		<servlet-name>BookEdit</servlet-name>
 		<servlet-class>info.books.Book_edit</servlet-class>
     </servlet>
+    <servlet>
+		<servlet-name>BookDelete</servlet-name>
+		<servlet-class>info.books.Book_delete</servlet-class>
+    </servlet>
     <servlet-mapping>
 		<servlet-name>LoginBookshelf</servlet-name>
 		<url-pattern>/login</url-pattern>
@@ -105,5 +109,9 @@
 	<servlet-mapping>
 		<servlet-name>BookEdit</servlet-name>
 		<url-pattern>/book_edit</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BookDelete</servlet-name>
+		<url-pattern>/book_delete</url-pattern>
 	</servlet-mapping>
 </web-app>

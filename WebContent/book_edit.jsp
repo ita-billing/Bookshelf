@@ -66,7 +66,7 @@
     <br>
     <div class="editCenter_display">
     <form action="<%=request.getContextPath()%>/check_edit" method="POST" name="edit_book">
-      <input type="hidden" name="EDIT_SEQID" value="<%=books.getSeqid()%>">               
+      <input type="hidden" name="EDIT_SEQID" value="<%=books.getSeqid()%>">
                タイトル: <input type="text" name="EDIT_TITLE" maxlength="50" value="<%=books.getTitle()%>"> 
                作者：  <input type="text" name="EDIT_AUTHORNAME" maxlength="50" value="<%=books.getAuthorname()%>">
                読破率（%）：  <input type="text" name="EDIT_PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>" size="2">
@@ -85,7 +85,8 @@
         <input class="button_line" type="submit" style="width:160px; height:35px" value="編集" onkeyup="return onInputClick();">
     </form>
 
-    <form method="POST" name="bookDelete_form">
+    <form action="<%=request.getContextPath()%>/book_delete" method="POST" name="bookDelete_form">
+      <input type="hidden" name="DELETE_SEQID" value="<%=books.getSeqid()%>">
       <input class="button_line" type="submit" style="width:160px; height:35px" value="削除" onClick="return onDeleteClick();">
     </form>
     </div>

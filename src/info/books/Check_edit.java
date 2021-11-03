@@ -70,10 +70,13 @@ public class Check_edit extends HttpServlet {
 			pstmt.setString(2, userid);
 			pstmt.setString(3, title);
 			
+			// タイトルを設定
+			title = "'" + title + "'";
+			
 			// 作者名未設定時はNULLを設定
 			if(authorname == "") {
 				pstmt.setNull(4, java.sql.Types.NULL);
-				authorname = "NULL";				
+				authorname = "NULL";
 			}else {
 				pstmt.setString(4, authorname);
 				authorname = "'" + authorname + "'";
@@ -81,7 +84,7 @@ public class Check_edit extends HttpServlet {
 			
 			// 読破率未設定時は0%に設定
 			if(progress == "") {
-				progress ="0";
+				progress = "0";
 			}
 			pstmt.setString(5, progress);
 			
@@ -129,20 +132,20 @@ public class Check_edit extends HttpServlet {
 					request.setAttribute("enddate",enddate);
 					request.setAttribute("evaluation",evaluation);
 					
-					RequestDispatcher BookEdit = request.getRequestDispatcher("/book_result.jsp");
-					//RequestDispatcher BookEdit = request.getRequestDispatcher("/Book_edit");
+					//RequestDispatcher BookEdit = request.getRequestDispatcher("/book_result.jsp");
+					RequestDispatcher BookEdit = request.getRequestDispatcher("/book_edit");
 					BookEdit.forward(request, response);
 				
 				}else{
 					// 0件以外は同じ内容が登録済みと判断する。
-					message ="本の内容の更新に失敗しました。同じ内容で更新は出来ません。";
+					message = "本の内容の更新に失敗しました。同じ内容で更新は出来ません。";
 					request.setAttribute("message", message);
 					request.getRequestDispatcher("/book_result.jsp").forward(request, response);
 				}
 			}
 		  }catch(Exception e) {
 			  // 例外処理
-			  message ="エラーが発生しました。再度ログインし直してください。";
+			  message = "エラーが発生しました。再度ログインし直してください。";
 			  request.setAttribute("message", message);
 			  request.getRequestDispatcher("/books_login.jsp").forward(request, response);
 			  }finally {

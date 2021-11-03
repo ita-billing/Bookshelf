@@ -65,7 +65,7 @@ public class BookBeans {
 	}
 	public void setProgress(String progress) {
 		// %を取り除く
-		this.progress = progress.replace("%", "");;
+		this.progress = progress.replace("%", "");
 	}
 	public String getStartdate() {
 		return startdate;
@@ -83,6 +83,13 @@ public class BookBeans {
 		return evaluation;
 	}
 	public void setEvaluation(String evaluation) {
-		this.evaluation = evaluation;
+		// 値によって数値に変換する
+		if(evaluation == "高") {
+			this.evaluation = "0";
+		}else if(evaluation == "低"){
+			this.evaluation = "1";
+		}else {
+			this.evaluation = evaluation;
+		}
 	}	
 }

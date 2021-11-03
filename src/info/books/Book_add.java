@@ -102,7 +102,7 @@ public class Book_add extends HttpServlet {
 			
 			// 結果画面に遷移
 			request.setAttribute("message", message);
-          request.getRequestDispatcher("/book_result.jsp").forward(request, response);
+            request.getRequestDispatcher("/book_result.jsp").forward(request, response);
 		
 		}catch(Exception e) {
 			// 例外処理

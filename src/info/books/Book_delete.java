@@ -3,6 +3,7 @@ package info.books;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
+import javax.sql.DataSource;
 
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
@@ -10,25 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 
-public class Book_edit extends HttpServlet {
+public class Book_delete extends HttpServlet {
 	
 	// データソースを設定
 	DataSource ds;
 	
-	public void init() throws ServletException {
+	public void init() throws ServletException{
 		try {
 			// DBの接続設定
 			InitialContext cont = new InitialContext();
 			ds = (DataSource) cont.lookup("java:comp/env/jdbc/bookshelf");
-			}catch (Exception e) {
-				throw new ServletException(e);
-			}
+		}catch (Exception e) {
+			throw new ServletException(e);
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			  throws ServletException,IOException{
+	  throws ServletException,IOException{
 		
 		// 初期設定
 		Connection conn = null;
@@ -37,12 +37,6 @@ public class Book_edit extends HttpServlet {
 		// 設定値の初期設定
 		String userid = null;
 		String seqid = null;
-		String title = null;
-		String authorname = null;
-		String progress = null;
-		String startdate = null;
-		String enddate = null;
-		String evaluation = null;
 		
 		//処理結果の初期設定
 		int result = -1;
@@ -52,7 +46,7 @@ public class Book_edit extends HttpServlet {
 		
 		try {
 			
-			// DBの接続
+			// DB接続
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
 			
@@ -60,53 +54,40 @@ public class Book_edit extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			userid = (String) session.getAttribute("userid");
 			
-			// 入力項目の設定
-			seqid = (String) request.getAttribute("seqid");
-			title = (String) request.getAttribute("title");
-			authorname = (String) request.getAttribute("authorname");
-			progress = (String) request.getAttribute("progress");
-			startdate = (String) request.getAttribute("startdate");
-			enddate = (String) request.getAttribute("enddate");
-			evaluation = (String) request.getAttribute("evaluation");
+			// 隠し項目からSEQIDを設定
+			seqid = (String) request.getParameter("DELETE_SEQID");
 			
-			// // SQL文作成：選択している本の情報を更新する。
-			String editsql = "UPDATE BOOKSHELF SET"
-					+" TITLE = "      + title
-					+",AUTHORNAME = " + authorname
-					+",PROGRESS = "   + progress
-					+",STARTDATE = "  + startdate
-					+",ENDDATE = "    + enddate
-					+",EVALUATION = " + evaluation
-					+",UPDATEDATE = NOW()"
+			// SQL文作成：選択されている本の情報をテーブルから削除する。
+			String deletesql = "DELETE FROM BOOKSHELF"
 					+" WHERE"
-					+" SEQID = " + seqid
+					+" SEQID  = " + seqid
 					+" AND ID = " + userid;
 			
 			// SQLの実行
-			result = stmt.executeUpdate(editsql);
+			result = stmt.executeUpdate(deletesql);
 			
 			// SQLの実行結果を確認
 			if (result == 1) {
-				message = "更新成功。";
+				message ="削除成功。";
 			}else {
-				message = "更新に失敗しました。更新内容が正しいか再確認して、再度編集画面から更新してください。";
+				message ="削除に失敗しました。再確認してください。";
 			}
 			
 			// 結果画面に遷移
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/book_result.jsp").forward(request, response);
 			
-		}catch (Exception e){
+		}catch(Exception e) {
 			// 例外処理
 			message = "エラーが発生しました。再度ログインし直してください。";
-			request.setAttribute("message",message);
-			request.getRequestDispatcher("/books_login.jsp").forward(request,response);
-		}finally{
+			request.setAttribute("meaasge",message);
+			request.getRequestDispatcher("/books_login.jsp").forward(request, response);
+		}finally {
 			try {
 				// DBの接続をクローズ
 				conn.close();
-			}catch (Exception e) {	
+			}catch(Exception e) {
 			}
-		}		
+		}
 	}
 }
