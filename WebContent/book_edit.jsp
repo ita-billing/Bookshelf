@@ -82,7 +82,7 @@
         </SELECT> 
         
       <div class="editCenter_display">
-        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集" onkeyup="return onInputClick();">
+        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集" onclick="return onEditClick();">
     </form>
 
     <form action="<%=request.getContextPath()%>/book_delete" method="POST" name="bookDelete_form">

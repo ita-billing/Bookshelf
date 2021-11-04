@@ -17,7 +17,6 @@ public class BookBeans {
 	// 項目の値（セッション）
 	private String userid;
 	
-    
     // 初期設定
     int count;
     int result;
@@ -83,13 +82,6 @@ public class BookBeans {
 		return evaluation;
 	}
 	public void setEvaluation(String evaluation) {
-		// 値によって数値に変換する
-		if(evaluation == "高") {
-			this.evaluation = "0";
-		}else if(evaluation == "低"){
-			this.evaluation = "1";
-		}else {
-			this.evaluation = evaluation;
-		}
+		this.evaluation = evaluation;
 	}	
 }

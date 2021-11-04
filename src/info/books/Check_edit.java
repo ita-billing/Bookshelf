@@ -61,6 +61,13 @@ public class Check_edit extends HttpServlet {
 			String enddate =  request.getParameter("EDIT_ENDDATE");
 			String evaluation =  request.getParameter("EDIT_EVALUATION");
 			
+			// 評価を変換
+			if(evaluation.equals("高")) {
+				evaluation = "0";
+			}else if(evaluation.equals("低")) {
+				evaluation = "1";
+			}
+			
 			// SQL文作成：入力情報に紐づく本の情報をカウントする。
 			String sql = ("SELECT COUNT(*)  AS COUNT FROM BOOKSHELF WHERE SEQID <=> ? AND ID = ? AND TITLE = ? AND AUTHORNAME <=> ? AND PROGRESS = ? AND STARTDATE <=> ? AND ENDDATE <=> ? AND EVALUATION <=> ?;");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
