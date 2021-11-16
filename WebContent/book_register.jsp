@@ -30,8 +30,13 @@
     <form action="<%=request.getContextPath()%>/check_register" method="POST" name="edit_form">
                タイトル: <input type="text" name="TITLE" maxlength="50">
                作者：  <input type="text" name="AUTHORNAME" maxlength="50">
+               出版社：  <input type="text" name="PUBLISHER" maxlength="50">
+      <br>
+      <br>
                読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3">
-       <br>               
+               出版日：  <input type="date" name="PUBLICATIONDATE">
+      <br>
+      <br>
                開始日：  <input type="date" name="STARTDATE">
                終了日：  <input type="date" name="ENDDATE">
                評価：
@@ -42,7 +47,7 @@
        </SELECT>
     
       <div class="editCenter_display">
-          <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onInputClick();">
+          <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
       </div>
     </form>
     </div>  

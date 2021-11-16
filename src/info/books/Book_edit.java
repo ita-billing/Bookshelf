@@ -39,7 +39,9 @@ public class Book_edit extends HttpServlet {
 		String seqid = null;
 		String title = null;
 		String authorname = null;
+		String publisher = null;
 		String progress = null;
+		String publicationdate = null;
 		String startdate = null;
 		String enddate = null;
 		String evaluation = null;
@@ -64,7 +66,9 @@ public class Book_edit extends HttpServlet {
 			seqid = (String) request.getAttribute("seqid");
 			title = (String) request.getAttribute("title");
 			authorname = (String) request.getAttribute("authorname");
+			publisher = (String) request.getAttribute("publisher");
 			progress = (String) request.getAttribute("progress");
+			publicationdate = (String) request.getAttribute("publicationdate");
 			startdate = (String) request.getAttribute("startdate");
 			enddate = (String) request.getAttribute("enddate");
 			evaluation = (String) request.getAttribute("evaluation");
@@ -73,7 +77,9 @@ public class Book_edit extends HttpServlet {
 			String editsql = "UPDATE BOOKSHELF SET"
 					+" TITLE = "      + title
 					+",AUTHORNAME = " + authorname
+					+",PUBLISHER = " + publisher
 					+",PROGRESS = "   + progress
+					+",PUBLICATIONDATE = " + publicationdate
 					+",STARTDATE = "  + startdate
 					+",ENDDATE = "    + enddate
 					+",EVALUATION = " + evaluation

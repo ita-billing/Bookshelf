@@ -56,20 +56,15 @@ public class Check_edit extends HttpServlet {
 			String seqid = request.getParameter("EDIT_SEQID");
 			String title =  request.getParameter("EDIT_TITLE");
 			String authorname =  request.getParameter("EDIT_AUTHORNAME");
+			String publisher =  request.getParameter("EDIT_PUBLISHER");
 			String progress =  request.getParameter("EDIT_PROGRESS");
+			String publicationdate =  request.getParameter("EDIT_PUBLICATIONDATE");
 			String startdate =  request.getParameter("EDIT_STARTDATE");
 			String enddate =  request.getParameter("EDIT_ENDDATE");
 			String evaluation =  request.getParameter("EDIT_EVALUATION");
-			
-			// 評価を変換
-			if(evaluation.equals("高")) {
-				evaluation = "0";
-			}else if(evaluation.equals("低")) {
-				evaluation = "1";
-			}
-			
+						
 			// SQL文作成：入力情報に紐づく本の情報をカウントする。
-			String sql = ("SELECT COUNT(*)  AS COUNT FROM BOOKSHELF WHERE SEQID <=> ? AND ID = ? AND TITLE = ? AND AUTHORNAME <=> ? AND PROGRESS = ? AND STARTDATE <=> ? AND ENDDATE <=> ? AND EVALUATION <=> ?;");
+			String sql = ("SELECT COUNT(*)  AS COUNT FROM BOOKSHELF WHERE SEQID <=> ? AND ID = ? AND TITLE = ? AND AUTHORNAME <=> ? AND PUBLISHER <=> ? AND PROGRESS = ? AND PUBLICATIONDATE <=> ? AND STARTDATE <=> ? AND ENDDATE <=> ? AND EVALUATION <=> ?;");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			// SQL文：入力値をWhereの条件に設定
@@ -89,36 +84,54 @@ public class Check_edit extends HttpServlet {
 				authorname = "'" + authorname + "'";
 			}
 			
+			// 出版社未設定時はNULLを設定
+			if(publisher == "") {
+				pstmt.setNull(5, java.sql.Types.NULL);
+				publisher = "NULL";
+			}else {
+				pstmt.setString(5, publisher);
+				publisher = "'" + publisher + "'";
+			}
+			
 			// 読破率未設定時は0%に設定
 			if(progress == "") {
 				progress = "0";
 			}
-			pstmt.setString(5, progress);
+			pstmt.setString(6, progress);
 			
-			// 開始日未設定時はNULLを設定
-			if(startdate == "") {
-				pstmt.setNull(6, java.sql.Types.NULL);
-				startdate = "NULL";
+			// 出版日未設定時はNULLを設定
+			if(publicationdate == "") {
+				pstmt.setNull(7, java.sql.Types.NULL);
+				publicationdate = "NULL";
 			}else {
-				pstmt.setString(6, startdate);
-				startdate = "'" + startdate + "'";
+				pstmt.setString(7, publicationdate);
+				publicationdate = "'" + publicationdate + "'";
 			}
 			
 			// 開始日未設定時はNULLを設定
+			if(startdate == "") {
+				pstmt.setNull(8, java.sql.Types.NULL);
+				startdate = "NULL";
+			}else {
+				pstmt.setString(8, startdate);
+				startdate = "'" + startdate + "'";
+			}
+			
+			// 終了日未設定時はNULLを設定
 			if(enddate == "") {
-				pstmt.setNull(7, java.sql.Types.NULL);
+				pstmt.setNull(9, java.sql.Types.NULL);
 				enddate = "NULL";
 			}else {
-				pstmt.setString(7, enddate);
+				pstmt.setString(9, enddate);
 				enddate = "'" + enddate + "'";
 			}
 			
 			// 評価が未設定の場合、登録できる値に設定
 			if(evaluation == "") {
-				pstmt.setNull(8, java.sql.Types.NULL);
+				pstmt.setNull(10, java.sql.Types.NULL);
 				evaluation = "NULL";
 			}else {
-				pstmt.setString(8, evaluation);
+				pstmt.setString(10, evaluation);
 				evaluation = "'" + evaluation + "'";
 			}
 			
@@ -130,16 +143,18 @@ public class Check_edit extends HttpServlet {
 				registerCount = rs.getInt("COUNT");
 				
 				if(registerCount == 0) {
-					//入力値をセット
+					// 入力値をセット
 					request.setAttribute("seqid",seqid);
 					request.setAttribute("title",title);
 					request.setAttribute("authorname",authorname);
+					request.setAttribute("publisher",publisher);
 					request.setAttribute("progress",progress);
+					request.setAttribute("publicationdate",publicationdate);
 					request.setAttribute("startdate",startdate);
 					request.setAttribute("enddate",enddate);
 					request.setAttribute("evaluation",evaluation);
 					
-					//RequestDispatcher BookEdit = request.getRequestDispatcher("/book_result.jsp");
+					// 更新処理に遷移
 					RequestDispatcher BookEdit = request.getRequestDispatcher("/book_edit");
 					BookEdit.forward(request, response);
 				

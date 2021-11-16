@@ -57,7 +57,9 @@ public class Check_register extends HttpServlet {
 				// 入力値をセット
 				String title =  request.getParameter("TITLE");
 				String authorname =  request.getParameter("AUTHORNAME");
+				String publisher =  request.getParameter("PUBLISHER");
 				String progress =  request.getParameter("PROGRESS");
+				String publicationdate =  request.getParameter("PUBLICATIONDATE");
 				String startdate =  request.getParameter("STARTDATE");
 				String enddate =  request.getParameter("ENDDATE");
 				String evaluation =  request.getParameter("EVALUATION");
@@ -74,12 +76,18 @@ public class Check_register extends HttpServlet {
 					authorname = "'" + authorname + "'";
 				}
 				
+				// 出版社を設定
+				sb.append("AND PUBLISHER = '" + publisher + "' ");
+				
 				// 読破率未設定時は0%に設定
 				if(progress == "") {
 					progress ="0";
 				}
 				sb.append("AND PROGRESS = '" + progress + "' ");
 				
+				// 出版日を設定
+				sb.append("AND PUBLICATIONDATE = '" + publicationdate + "' ");
+								
 				// 開始日未設定時はNULLを設定
 				if(startdate == "") {
 					sb.append("AND STARTDATE IS NULL ");
@@ -119,7 +127,9 @@ public class Check_register extends HttpServlet {
 						//入力値をセット
 						request.setAttribute("title",title);
 						request.setAttribute("authorname",authorname);
+						request.setAttribute("publisher",publisher);
 						request.setAttribute("progress",progress);
+						request.setAttribute("publicationdate",publicationdate);
 						request.setAttribute("startdate",startdate);
 						request.setAttribute("enddate",enddate);
 						request.setAttribute("evaluation",evaluation);
