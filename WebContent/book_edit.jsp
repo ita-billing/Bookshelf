@@ -35,7 +35,7 @@
         <td class="table_header">タイトル</td>
         <td class="table_header">作者</td>
         <td class="table_header">出版社</td>
-        <td class="table_header center_display">読破率（%）</td>
+        <td class="table_header center_display">読破率（%）</td>
         <td class="table_header center_display">出版日</td>
         <td class="table_header center_display">開始日</td>
         <td class="table_header center_display">終了日</td>
@@ -78,7 +78,7 @@
                出版社：  <input type="text" name="EDIT_PUBLISHER" maxlength="50" value="<%=books.getPublisher()%>">
       <br>
       <br>
-               読破率（%）：  <input type="text" name="EDIT_PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>" size="2">
+               読破率（%）：  <input type="number" name="EDIT_PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>">
                出版日：  <input type="date" name="EDIT_PUBLICATIONDATE" value="<%=books.getPublicationdate()%>">
       <br>
       <br>

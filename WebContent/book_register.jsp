@@ -33,7 +33,7 @@
                出版社：  <input type="text" name="PUBLISHER" maxlength="50">
       <br>
       <br>
-               読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3">
+               読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3" min="0" max="100">
                出版日：  <input type="date" name="PUBLICATIONDATE">
       <br>
       <br>
