@@ -53,15 +53,15 @@ public class Check_edit extends HttpServlet {
 			String userid = (String) session.getAttribute("userid");
 			
 			// 入力値をセット
-			String seqid = request.getParameter("EDIT_SEQID");
-			String title =  request.getParameter("EDIT_TITLE");
-			String authorname =  request.getParameter("EDIT_AUTHORNAME");
-			String publisher =  request.getParameter("EDIT_PUBLISHER");
-			String progress =  request.getParameter("EDIT_PROGRESS");
-			String publicationdate =  request.getParameter("EDIT_PUBLICATIONDATE");
-			String startdate =  request.getParameter("EDIT_STARTDATE");
-			String enddate =  request.getParameter("EDIT_ENDDATE");
-			String evaluation =  request.getParameter("EDIT_EVALUATION");
+			String seqid = request.getParameter("SEQID");
+			String title =  request.getParameter("TITLE");
+			String authorname =  request.getParameter("AUTHORNAME");
+			String publisher =  request.getParameter("PUBLISHER");
+			String progress =  request.getParameter("PROGRESS");
+			String publicationdate =  request.getParameter("PUBLICATIONDATE");
+			String startdate =  request.getParameter("STARTDATE");
+			String enddate =  request.getParameter("ENDDATE");
+			String evaluation =  request.getParameter("EVALUATION");
 						
 			// SQL文作成：入力情報に紐づく本の情報をカウントする。
 			String sql = ("SELECT COUNT(*)  AS COUNT FROM BOOKSHELF WHERE SEQID <=> ? AND ID = ? AND TITLE = ? AND AUTHORNAME <=> ? AND PUBLISHER <=> ? AND PROGRESS = ? AND PUBLICATIONDATE <=> ? AND STARTDATE <=> ? AND ENDDATE <=> ? AND EVALUATION <=> ?;");

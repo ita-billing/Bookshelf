@@ -6,7 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script type="text/javascript" src="js/check_edit.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/check_book.js"></script>
 <script type="text/javascript" src="js/check_delete.js"></script>
 <script type="text/javascript" src="js/logout.js"></script>
 <title>編集画面</title>
@@ -71,21 +73,31 @@
           以下から変更できます。
     <br>
     <div class="editCenter_display">
-    <form action="<%=request.getContextPath()%>/check_edit" method="POST" name="edit_book">
-      <input type="hidden" name="EDIT_SEQID" value="<%=books.getSeqid()%>">
-               タイトル: <input type="text" name="EDIT_TITLE" maxlength="50" value="<%=books.getTitle()%>"> 
-               作者：  <input type="text" name="EDIT_AUTHORNAME" maxlength="50" value="<%=books.getAuthorname()%>">
-               出版社：  <input type="text" name="EDIT_PUBLISHER" maxlength="50" value="<%=books.getPublisher()%>">
+    <form action="<%=request.getContextPath()%>/check_edit" method="POST" id="book_form">
+      <input type="hidden" name="SEQID" value="<%=books.getSeqid()%>">
+               タイトル: <input type="text" name="TITLE" maxlength="50" value="<%=books.getTitle()%>">
       <br>
       <br>
-               読破率（%）：  <input type="number" name="EDIT_PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>">
-               出版日：  <input type="date" name="EDIT_PUBLICATIONDATE" value="<%=books.getPublicationdate()%>">
+               作者：  <input type="text" name="AUTHORNAME" maxlength="50" value="<%=books.getAuthorname()%>">
+      <br>         
+      <br>        
+               出版社：  <input type="text" name="PUBLISHER" maxlength="50" value="<%=books.getPublisher()%>">
       <br>
       <br>
-               開始日：  <input type="date" name="EDIT_STARTDATE" value="<%=books.getStartdate()%>">
-               終了日：  <input type="date" name="EDIT_ENDDATE" value="<%=books.getEnddate()%>">
+               読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3" value="<%=books.getProgress()%>">
+      <br>         
+      <br>         
+               出版日：  <input type="date" name="PUBLICATIONDATE" value="<%=books.getPublicationdate()%>">
+      <br>
+      <br>
+               開始日：  <input type="date" name="STARTDATE" value="<%=books.getStartdate()%>">
+      <br>
+      <br>         
+               終了日：  <input type="date" name="ENDDATE" value="<%=books.getEnddate()%>">
+      <br>
+      <br>        
                評価：
-        <SELECT name="EDIT_EVALUATION">
+        <SELECT name="EVALUATION">
           <OPTION value="<%=books.getEvaluationvalue()%>" selected><%=books.getEvaluation()%></OPTION>
           <OPTION value=""></OPTION>
           <OPTION value="0">高</OPTION>
@@ -93,7 +105,7 @@
         </SELECT> 
         
       <div class="editCenter_display">
-        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集" onclick="return onEditClick();">
+        <input class="button_line" type="submit" style="width:160px; height:35px" value="編集" onclick="return onBookClick();">
     </form>
     
     <form action="<%=request.getContextPath()%>/book_delete" method="POST" name="bookDelete_form">

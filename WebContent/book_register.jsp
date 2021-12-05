@@ -5,7 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script type="text/javascript" src="js/check_input.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/check_book.js"></script>
 <script type="text/javascript" src="js/logout.js"></script>
 <title>登録</title>
 <h2>登録</h2>
@@ -27,18 +29,28 @@
 
          以下から登録できます。
     <div class="editCenter_display">
-    <form action="<%=request.getContextPath()%>/check_register" method="POST" name="edit_form">
-               タイトル: <input type="text" name="TITLE" maxlength="50">
-               作者：  <input type="text" name="AUTHORNAME" maxlength="50">
-               出版社：  <input type="text" name="PUBLISHER" maxlength="50">
+    <form action="<%=request.getContextPath()%>/check_register" method="POST" id="book_form">
+               タイトル: <input type="text" name="TITLE" maxlength="50"　value="">
       <br>
       <br>
-               読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3" min="0" max="100">
-               出版日：  <input type="date" name="PUBLICATIONDATE">
+               作者：  <input type="text" name="AUTHORNAME" maxlength="50"　value="">
       <br>
       <br>
-               開始日：  <input type="date" name="STARTDATE">
-               終了日：  <input type="date" name="ENDDATE">
+               出版社：  <input type="text" name="PUBLISHER" maxlength="50"　value="">
+      <br>
+      <br>
+               読破率（%）：  <input type="number" name="PROGRESS" size="2" maxlength="3" min="0" max="100"　value="">
+      <br>
+      <br>
+               出版日：  <input type="date" name="PUBLICATIONDATE"　value="">
+      <br>
+      <br>
+               開始日：  <input type="date" name="STARTDATE"　value="">
+      <br>
+      <br>
+               終了日：  <input type="date" name="ENDDATE"　value="">
+      <br>
+      <br>
                評価：
        <SELECT name="EVALUATION">
          <OPTION value=""></OPTION>
@@ -47,11 +59,11 @@
        </SELECT>
     
       <div class="editCenter_display">
-          <input type="submit" style="width:160px; height:35px" value="登録" onClick="return onRegisterClick();">
+          <input type="submit" class="button_line" style="width:160px; height:35px" value="登録" onClick="return onBookClick();">
       </div>
     </form>
-    </div>  
-
+    </div>
+    
     <div class="editCenter_display">
       <form action="<%=request.getContextPath()%>/init_bookshelf" method="POST" name="bookRegister_form">
         <input type="submit" style="width:160px; height:35px" value="戻る">
